@@ -1,0 +1,17 @@
+C:\Project\Sports\Titans\bin\Debug\netcoreapp2.0\TitansAPI.deps.json
+C:\Project\Sports\Titans\bin\Debug\netcoreapp2.0\TitansAPI.dll
+C:\Project\Sports\Titans\bin\Debug\netcoreapp2.0\TitansAPI.pdb
+C:\Project\Sports\Titans\obj\Debug\netcoreapp2.0\TitansAPI.csprojResolveAssemblyReference.cache
+C:\Project\Sports\Titans\obj\Debug\netcoreapp2.0\TitansAPI.csproj.CoreCompileInputs.cache
+C:\Project\Sports\Titans\obj\Debug\netcoreapp2.0\TitansAPI.AssemblyInfoInputs.cache
+C:\Project\Sports\Titans\obj\Debug\netcoreapp2.0\TitansAPI.AssemblyInfo.cs
+C:\Project\Sports\Titans\obj\Debug\netcoreapp2.0\TitansAPI.dll
+C:\Project\Sports\Titans\obj\Debug\netcoreapp2.0\TitansAPI.pdb
+C:\Project\TitansAPI\bin\Debug\netcoreapp2.0\TitansAPI.deps.json
+C:\Project\TitansAPI\bin\Debug\netcoreapp2.0\TitansAPI.dll
+C:\Project\TitansAPI\bin\Debug\netcoreapp2.0\TitansAPI.pdb
+C:\Project\TitansAPI\obj\Debug\netcoreapp2.0\TitansAPI.csproj.CoreCompileInputs.cache
+C:\Project\TitansAPI\obj\Debug\netcoreapp2.0\TitansAPI.AssemblyInfoInputs.cache
+C:\Project\TitansAPI\obj\Debug\netcoreapp2.0\TitansAPI.AssemblyInfo.cs
+C:\Project\TitansAPI\obj\Debug\netcoreapp2.0\TitansAPI.dll
+C:\Project\TitansAPI\obj\Debug\netcoreapp2.0\TitansAPI.pdb

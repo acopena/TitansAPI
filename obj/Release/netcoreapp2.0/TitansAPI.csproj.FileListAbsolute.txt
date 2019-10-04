@@ -1,0 +1,9 @@
+C:\Project\TitansAPI\bin\Release\netcoreapp2.0\TitansAPI.deps.json
+C:\Project\TitansAPI\bin\Release\netcoreapp2.0\TitansAPI.dll
+C:\Project\TitansAPI\bin\Release\netcoreapp2.0\TitansAPI.pdb
+C:\Project\TitansAPI\obj\Release\netcoreapp2.0\TitansAPI.csprojResolveAssemblyReference.cache
+C:\Project\TitansAPI\obj\Release\netcoreapp2.0\TitansAPI.csproj.CoreCompileInputs.cache
+C:\Project\TitansAPI\obj\Release\netcoreapp2.0\TitansAPI.AssemblyInfoInputs.cache
+C:\Project\TitansAPI\obj\Release\netcoreapp2.0\TitansAPI.AssemblyInfo.cs
+C:\Project\TitansAPI\obj\Release\netcoreapp2.0\TitansAPI.dll
+C:\Project\TitansAPI\obj\Release\netcoreapp2.0\TitansAPI.pdb

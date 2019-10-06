@@ -11,6 +11,6 @@ namespace TitansAPI.Model
         public DateTime? EventTeamConfirmationDate { get; set; }
         public bool? EventConfirmationStatus { get; set; }
 
-        public BEventTeams EventsTeam { get; set; }
+        public virtual BEventTeams EventsTeam { get; set; }
     }
 }

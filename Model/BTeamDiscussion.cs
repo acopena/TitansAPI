@@ -11,7 +11,7 @@ namespace TitansAPI.Model
         public int UserId { get; set; }
         public string Notes { get; set; }
 
-        public BTeam Team { get; set; }
-        public BUsers User { get; set; }
+        public virtual BTeam Team { get; set; }
+        public virtual BUsers User { get; set; }
     }
 }

@@ -24,8 +24,8 @@ namespace TitansAPI.Model
         public string AccountNo { get; set; }
         public string GenderId { get; set; }
 
-        public ICollection<BMemberRegistration> BMemberRegistration { get; set; }
-        public ICollection<BServicesFee> BServicesFee { get; set; }
-        public ICollection<BTeam> BTeam { get; set; }
+        public virtual ICollection<BMemberRegistration> BMemberRegistration { get; set; }
+        public virtual ICollection<BServicesFee> BServicesFee { get; set; }
+        public virtual ICollection<BTeam> BTeam { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace TitansAPI.Model
         public int MemberRegId { get; set; }
         public decimal? FeeAmount { get; set; }
 
-        public BMemberRegistration MemberReg { get; set; }
-        public BOrfile OrnoNavigation { get; set; }
+        public virtual BMemberRegistration MemberReg { get; set; }
+        public virtual BOrfile OrnoNavigation { get; set; }
     }
 }

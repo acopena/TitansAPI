@@ -13,6 +13,6 @@ namespace TitansAPI.Model
         public int CartStatusId { get; set; }
         public string CartStatusName { get; set; }
 
-        public ICollection<BCart> BCart { get; set; }
+        public virtual ICollection<BCart> BCart { get; set; }
     }
 }

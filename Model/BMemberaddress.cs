@@ -20,6 +20,6 @@ namespace TitansAPI.Model
         public int? MemberCreateUserId { get; set; }
         public int? MemberUpdateUserId { get; set; }
 
-        public BAddressType AddressType { get; set; }
+        public virtual BAddressType AddressType { get; set; }
     }
 }

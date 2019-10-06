@@ -14,7 +14,7 @@ namespace TitansAPI.Model
         public string AccountName { get; set; }
         public int AccountTypeId { get; set; }
 
-        public BAccountType AccountType { get; set; }
-        public ICollection<BServicesFee> BServicesFee { get; set; }
+        public virtual BAccountType AccountType { get; set; }
+        public virtual ICollection<BServicesFee> BServicesFee { get; set; }
     }
 }

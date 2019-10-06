@@ -7515,11 +7515,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Project\\TitansAPI\\TitansAPI.csproj",
+      "projectUniqueName": "C:\\repo\\TitansAPI\\TitansAPI.csproj",
       "projectName": "TitansAPI",
-      "projectPath": "C:\\Project\\TitansAPI\\TitansAPI.csproj",
+      "projectPath": "C:\\repo\\TitansAPI\\TitansAPI.csproj",
       "packagesPath": "C:\\Users\\acopena\\.nuget\\packages\\",
-      "outputPath": "C:\\Project\\TitansAPI\\obj\\",
+      "outputPath": "C:\\repo\\TitansAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",

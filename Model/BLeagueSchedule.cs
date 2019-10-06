@@ -17,7 +17,7 @@ namespace TitansAPI.Model
         public int? TeamId { get; set; }
         public int? EventNo { get; set; }
 
-        public BEvents EventNoNavigation { get; set; }
-        public BTeam Team { get; set; }
+        public virtual BEvents EventNoNavigation { get; set; }
+        public virtual BTeam Team { get; set; }
     }
 }

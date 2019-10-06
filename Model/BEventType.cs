@@ -13,6 +13,6 @@ namespace TitansAPI.Model
         public int EventTypeId { get; set; }
         public string EventTypeName { get; set; }
 
-        public ICollection<BEvents> BEvents { get; set; }
+        public virtual ICollection<BEvents> BEvents { get; set; }
     }
 }

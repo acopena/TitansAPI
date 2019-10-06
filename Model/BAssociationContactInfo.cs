@@ -17,7 +17,7 @@ namespace TitansAPI.Model
         public int? AssociationId { get; set; }
         public int? ContactTypeId { get; set; }
 
-        public BAssociation Association { get; set; }
-        public BContactType ContactType { get; set; }
+        public virtual BAssociation Association { get; set; }
+        public virtual BContactType ContactType { get; set; }
     }
 }

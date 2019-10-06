@@ -14,7 +14,7 @@ namespace TitansAPI.Model
         public int AddressTypeId { get; set; }
         public string AddressTypeName { get; set; }
 
-        public ICollection<BAssociationAddress> BAssociationAddress { get; set; }
-        public ICollection<BMemberaddress> BMemberaddress { get; set; }
+        public virtual ICollection<BAssociationAddress> BAssociationAddress { get; set; }
+        public virtual ICollection<BMemberaddress> BMemberaddress { get; set; }
     }
 }

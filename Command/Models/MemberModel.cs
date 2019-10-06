@@ -24,7 +24,6 @@ namespace TitansAPI.Command.Models
         public BRelationshipType Relationship { get; set; }
         public BStatus Status { get; set; }
         public BUsers User { get; set; }
-        public ICollection<BClinicMember> BClinicMember { get; set; }
         public ICollection<BJersey> BJersey { get; set; }
         public ICollection<BMemberContactInfo> BMemberContactInfo { get; set; }
         public ICollection<BMemberEmergencyContact> BMemberEmergencyContact { get; set; }

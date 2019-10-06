@@ -13,6 +13,6 @@ namespace TitansAPI.Model
         public bool? CoachScheduleAttended { get; set; }
         public string CoachScheduleNotes { get; set; }
 
-        public BUsers User { get; set; }
+        public virtual BUsers User { get; set; }
     }
 }

@@ -13,6 +13,6 @@ namespace TitansAPI.Model
         public int DiscountFeeTypeId { get; set; }
         public string DiscountFeeTypeName { get; set; }
 
-        public ICollection<BDiscountFees> BDiscountFees { get; set; }
+        public virtual ICollection<BDiscountFees> BDiscountFees { get; set; }
     }
 }

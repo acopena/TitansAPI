@@ -15,6 +15,6 @@ namespace TitansAPI.Model
         public string BankContactEmail { get; set; }
         public string BankContactPhone { get; set; }
 
-        public BAssociation Association { get; set; }
+        public virtual BAssociation Association { get; set; }
     }
 }

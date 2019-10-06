@@ -12,8 +12,8 @@ namespace TitansAPI.Model
         public decimal? Amount { get; set; }
         public DateTime? TrxDate { get; set; }
 
-        public BCart CartGu { get; set; }
-        public BMemberRegistration MemberReg { get; set; }
-        public BServicesFee ServicesFee { get; set; }
+        public virtual BCart CartGu { get; set; }
+        public virtual BMemberRegistration MemberReg { get; set; }
+        public virtual BServicesFee ServicesFee { get; set; }
     }
 }

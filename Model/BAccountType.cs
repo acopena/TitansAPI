@@ -13,6 +13,6 @@ namespace TitansAPI.Model
         public int AccountTypeId { get; set; }
         public string AccountTypeDesc { get; set; }
 
-        public ICollection<BCoa> BCoa { get; set; }
+        public virtual ICollection<BCoa> BCoa { get; set; }
     }
 }

@@ -20,8 +20,8 @@ namespace TitansAPI.Model
         public double Hst { get; set; }
         public double Qst { get; set; }
 
-        public BAssociation Association { get; set; }
-        public BFees Fee { get; set; }
-        public ICollection<BMemberFees> BMemberFees { get; set; }
+        public virtual BAssociation Association { get; set; }
+        public virtual BFees Fee { get; set; }
+        public virtual ICollection<BMemberFees> BMemberFees { get; set; }
     }
 }

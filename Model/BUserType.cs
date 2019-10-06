@@ -13,6 +13,6 @@ namespace TitansAPI.Model
         public int UserTypeId { get; set; }
         public string UserTypeName { get; set; }
 
-        public ICollection<BUsers> BUsers { get; set; }
+        public virtual ICollection<BUsers> BUsers { get; set; }
     }
 }

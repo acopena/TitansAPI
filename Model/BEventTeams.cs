@@ -16,8 +16,8 @@ namespace TitansAPI.Model
         public DateTime DateJoin { get; set; }
         public int PostedById { get; set; }
 
-        public BEvents EventNoNavigation { get; set; }
-        public BTeam Team { get; set; }
-        public ICollection<BEventTeamConfirmation> BEventTeamConfirmation { get; set; }
+        public virtual BEvents EventNoNavigation { get; set; }
+        public virtual BTeam Team { get; set; }
+        public virtual ICollection<BEventTeamConfirmation> BEventTeamConfirmation { get; set; }
     }
 }

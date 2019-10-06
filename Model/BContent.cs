@@ -24,9 +24,9 @@ namespace TitansAPI.Model
         public DateTime? PublishedStartDate { get; set; }
         public int? SortKey { get; set; }
 
-        public BContentType ContentType { get; set; }
-        public BPageContent PageContent { get; set; }
-        public ICollection<BContentApproved> BContentApproved { get; set; }
-        public ICollection<BContentDocuments> BContentDocuments { get; set; }
+        public virtual BContentType ContentType { get; set; }
+        public virtual BPageContent PageContent { get; set; }
+        public virtual ICollection<BContentApproved> BContentApproved { get; set; }
+        public virtual ICollection<BContentDocuments> BContentDocuments { get; set; }
     }
 }

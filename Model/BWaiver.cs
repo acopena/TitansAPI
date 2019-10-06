@@ -16,6 +16,6 @@ namespace TitansAPI.Model
         public string WaiverBody { get; set; }
         public DateTime? DateCreated { get; set; }
 
-        public ICollection<BMemberRegistration> BMemberRegistration { get; set; }
+        public virtual ICollection<BMemberRegistration> BMemberRegistration { get; set; }
     }
 }

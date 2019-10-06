@@ -15,7 +15,7 @@ namespace TitansAPI.Model
         public bool RequiredFees { get; set; }
         public int? FeeTypeId { get; set; }
 
-        public BFeeType FeeType { get; set; }
-        public ICollection<BFeeTrx> BFeeTrx { get; set; }
+        public virtual BFeeType FeeType { get; set; }
+        public virtual ICollection<BFeeTrx> BFeeTrx { get; set; }
     }
 }

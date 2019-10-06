@@ -19,10 +19,10 @@ namespace TitansAPI.Model
         public int? DivisionId { get; set; }
         public int? ServicesTypeId { get; set; }
 
-        public BCoa AccountNoNavigation { get; set; }
-        public BDivision Division { get; set; }
-        public BServicesType ServicesType { get; set; }
-        public ICollection<BMemberServiceFee> BMemberServiceFee { get; set; }
-        public ICollection<BTeam> BTeam { get; set; }
+        public virtual BCoa AccountNoNavigation { get; set; }
+        public virtual BDivision Division { get; set; }
+        public virtual BServicesType ServicesType { get; set; }
+        public virtual ICollection<BMemberServiceFee> BMemberServiceFee { get; set; }
+        public virtual ICollection<BTeam> BTeam { get; set; }
     }
 }

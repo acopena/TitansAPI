@@ -15,6 +15,6 @@ namespace TitansAPI.Model
         public string EventPostalCode { get; set; }
         public string LocationDesc { get; set; }
 
-        public BEvents EventNoNavigation { get; set; }
+        public virtual BEvents EventNoNavigation { get; set; }
     }
 }

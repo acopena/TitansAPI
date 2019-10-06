@@ -11,9 +11,9 @@ namespace TitansAPI.Model
             BLeagueSchedule = new HashSet<BLeagueSchedule>();
             BTeamContact = new HashSet<BTeamContact>();
             BTeamDiscussion = new HashSet<BTeamDiscussion>();
+            BTeamGame = new HashSet<BTeamGame>();
             BTeamOfficial = new HashSet<BTeamOfficial>();
             BTeamPlayers = new HashSet<BTeamPlayers>();
-            BTeamProgram = new HashSet<BTeamProgram>();
         }
 
         public int TeamId { get; set; }
@@ -33,14 +33,14 @@ namespace TitansAPI.Model
         public int? ServiceFeeId { get; set; }
         public bool? IsCompetitive { get; set; }
 
-        public BDivision Division { get; set; }
-        public BServicesFee ServiceFee { get; set; }
-        public ICollection<BEventTeams> BEventTeams { get; set; }
-        public ICollection<BLeagueSchedule> BLeagueSchedule { get; set; }
-        public ICollection<BTeamContact> BTeamContact { get; set; }
-        public ICollection<BTeamDiscussion> BTeamDiscussion { get; set; }
-        public ICollection<BTeamOfficial> BTeamOfficial { get; set; }
-        public ICollection<BTeamPlayers> BTeamPlayers { get; set; }
-        public ICollection<BTeamProgram> BTeamProgram { get; set; }
+        public virtual BDivision Division { get; set; }
+        public virtual BServicesFee ServiceFee { get; set; }
+        public virtual ICollection<BEventTeams> BEventTeams { get; set; }
+        public virtual ICollection<BLeagueSchedule> BLeagueSchedule { get; set; }
+        public virtual ICollection<BTeamContact> BTeamContact { get; set; }
+        public virtual ICollection<BTeamDiscussion> BTeamDiscussion { get; set; }
+        public virtual ICollection<BTeamGame> BTeamGame { get; set; }
+        public virtual ICollection<BTeamOfficial> BTeamOfficial { get; set; }
+        public virtual ICollection<BTeamPlayers> BTeamPlayers { get; set; }
     }
 }

@@ -12,9 +12,9 @@ namespace TitansAPI.Command.Action
         public async Task<List<UploadDisplayModel>> GetUploadList(int? divisionId, int? seasonId)
         {
             List<UploadDisplayModel> uploadList = new List<UploadDisplayModel>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
-                uploadList = await (from p in ctx.Bupload
+                uploadList = await (from p in ctx.BUpload
                                     where p.EndDate == null
                                     select new UploadDisplayModel()
                                     {
@@ -41,9 +41,9 @@ namespace TitansAPI.Command.Action
         public async Task<List<UploadDisplayModel>> GetUpload(int uploadId)
         {
             List<UploadDisplayModel> uploadList = new List<UploadDisplayModel>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
-                uploadList = await (from p in ctx.Bupload
+                uploadList = await (from p in ctx.BUpload
                                     where p.UploadId == uploadId && p.EndDate == null
                                     select new UploadDisplayModel()
                                     {
@@ -63,11 +63,11 @@ namespace TitansAPI.Command.Action
 
             try
             {
-                using (var ctx = new PBAContext())
+                using (var ctx = new titansContext())
                 {
                     foreach (var cImg in model.ImageList)
                     {
-                        var image = await (from p in ctx.Bupload
+                        var image = await (from p in ctx.BUpload
                                            where p.Name == cImg.Name && p.SeasonId == model.SeasonId && p.DivisionId == model.DivisionId && p.EndDate == null
                                            select p).FirstOrDefaultAsync();
 
@@ -80,7 +80,7 @@ namespace TitansAPI.Command.Action
                             img.SeasonId = model.SeasonId.Value;
                             img.FromDate = DateTime.Now;
                             img.DivisionId = model.DivisionId;
-                            ctx.Bupload.Add(img);
+                            ctx.BUpload.Add(img);
                         }
                     }
                     ctx.SaveChanges();

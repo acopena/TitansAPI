@@ -4,8 +4,17 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace TitansAPI.Model
 {
-    public partial class PBAContext : DbContext
+    public partial class titansContext : DbContext
     {
+        public titansContext()
+        {
+        }
+
+        public titansContext(DbContextOptions<titansContext> options)
+            : base(options)
+        {
+        }
+
         public virtual DbSet<AddressType> AddressType { get; set; }
         public virtual DbSet<BAccountType> BAccountType { get; set; }
         public virtual DbSet<BAddressType> BAddressType { get; set; }
@@ -17,47 +26,37 @@ namespace TitansAPI.Model
         public virtual DbSet<BCalendar> BCalendar { get; set; }
         public virtual DbSet<BCart> BCart { get; set; }
         public virtual DbSet<BCartStatus> BCartStatus { get; set; }
-        public virtual DbSet<BClinic> BClinic { get; set; }
-        public virtual DbSet<BClinicMember> BClinicMember { get; set; }
-        public virtual DbSet<BClinicOfficials> BClinicOfficials { get; set; }
-        public virtual DbSet<BClinicProgramAttachment> BClinicProgramAttachment { get; set; }
-        public virtual DbSet<BClinicPrograms> BClinicPrograms { get; set; }
-        public virtual DbSet<BClinicProgramTrx> BClinicProgramTrx { get; set; }
-        public virtual DbSet<BClinicProgramType> BClinicProgramType { get; set; }
-        public virtual DbSet<BClinicProgramVideoLink> BClinicProgramVideoLink { get; set; }
-        public virtual DbSet<BClinicSchedule> BClinicSchedule { get; set; }
-        public virtual DbSet<BClinicstaff> BClinicstaff { get; set; }
         public virtual DbSet<BCoa> BCoa { get; set; }
         public virtual DbSet<BCoachSchedule> BCoachSchedule { get; set; }
-        public virtual DbSet<BContactUs> BContactUs { get; set; }
         public virtual DbSet<BContactType> BContactType { get; set; }
+        public virtual DbSet<BContactUs> BContactUs { get; set; }
         public virtual DbSet<BContent> BContent { get; set; }
         public virtual DbSet<BContentApproved> BContentApproved { get; set; }
         public virtual DbSet<BContentDocuments> BContentDocuments { get; set; }
         public virtual DbSet<BContentType> BContentType { get; set; }
-        public virtual DbSet<BDiscountFees> BDiscountFees { get; set; }
         public virtual DbSet<BDiscountFeeType> BDiscountFeeType { get; set; }
+        public virtual DbSet<BDiscountFees> BDiscountFees { get; set; }
         public virtual DbSet<BDivision> BDivision { get; set; }
         public virtual DbSet<BEventAddress> BEventAddress { get; set; }
         public virtual DbSet<BEventDivision> BEventDivision { get; set; }
-        public virtual DbSet<BEvents> BEvents { get; set; }
         public virtual DbSet<BEventTeamConfirmation> BEventTeamConfirmation { get; set; }
         public virtual DbSet<BEventTeams> BEventTeams { get; set; }
         public virtual DbSet<BEventType> BEventType { get; set; }
-        public virtual DbSet<BFees> BFees { get; set; }
+        public virtual DbSet<BEvents> BEvents { get; set; }
         public virtual DbSet<BFeeTrx> BFeeTrx { get; set; }
         public virtual DbSet<BFeeType> BFeeType { get; set; }
+        public virtual DbSet<BFees> BFees { get; set; }
         public virtual DbSet<BGymInfo> BGymInfo { get; set; }
         public virtual DbSet<BJersey> BJersey { get; set; }
         public virtual DbSet<BLeagueSchedule> BLeagueSchedule { get; set; }
         public virtual DbSet<BMember> BMember { get; set; }
-        public virtual DbSet<BMemberaddress> BMemberaddress { get; set; }
         public virtual DbSet<BMemberContactInfo> BMemberContactInfo { get; set; }
         public virtual DbSet<BMemberDiscount> BMemberDiscount { get; set; }
         public virtual DbSet<BMemberEmergencyContact> BMemberEmergencyContact { get; set; }
         public virtual DbSet<BMemberFees> BMemberFees { get; set; }
         public virtual DbSet<BMemberRegistration> BMemberRegistration { get; set; }
         public virtual DbSet<BMemberServiceFee> BMemberServiceFee { get; set; }
+        public virtual DbSet<BMemberaddress> BMemberaddress { get; set; }
         public virtual DbSet<BOfficial> BOfficial { get; set; }
         public virtual DbSet<BOfficialStatus> BOfficialStatus { get; set; }
         public virtual DbSet<BOrfile> BOrfile { get; set; }
@@ -83,20 +82,22 @@ namespace TitansAPI.Model
         public virtual DbSet<BTeam> BTeam { get; set; }
         public virtual DbSet<BTeamContact> BTeamContact { get; set; }
         public virtual DbSet<BTeamDiscussion> BTeamDiscussion { get; set; }
+        public virtual DbSet<BTeamGame> BTeamGame { get; set; }
         public virtual DbSet<BTeamOfficial> BTeamOfficial { get; set; }
         public virtual DbSet<BTeamPlayers> BTeamPlayers { get; set; }
-        public virtual DbSet<BTeamProgram> BTeamProgram { get; set; }
+        public virtual DbSet<BTeamStat> BTeamStat { get; set; }
         public virtual DbSet<BTvMenu> BTvMenu { get; set; }
-        public virtual DbSet<BUsers> BUsers { get; set; }
+        public virtual DbSet<BUpload> BUpload { get; set; }
         public virtual DbSet<BUserType> BUserType { get; set; }
+        public virtual DbSet<BUsers> BUsers { get; set; }
         public virtual DbSet<BWaiver> BWaiver { get; set; }
-        public virtual DbSet<BUpload> Bupload{ get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-               // optionsBuilder.UseSqlServer(@"Data Source=PINOY\PINOY;Initial Catalog=PBA;Integrated Security=True");
+                // optionsBuilder.UseSqlServer("Server=PINOY\\PINOY;Initial Catalog=titans;Integrated Security=True");
+
                 string cn = @"Data Source=tcp:sql2k1602.discountasp.net;Initial Catalog=SQL2016_921245_opena;User ID=SQL2016_921245_opena_user;Password=@co1367551;";
                 optionsBuilder.UseSqlServer(cn);
             }
@@ -104,6 +105,8 @@ namespace TitansAPI.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasAnnotation("ProductVersion", "2.2.2-servicing-10034");
+
             modelBuilder.Entity<AddressType>(entity =>
             {
                 entity.Property(e => e.AddressTypeId).HasColumnName("AddressTypeID");
@@ -132,7 +135,8 @@ namespace TitansAPI.Model
 
             modelBuilder.Entity<BAddressType>(entity =>
             {
-                entity.HasKey(e => e.AddressTypeId);
+                entity.HasKey(e => e.AddressTypeId)
+                    .HasName("PK__b_Addres__8BF56CC103317E3D");
 
                 entity.ToTable("b_AddressType");
 
@@ -143,7 +147,8 @@ namespace TitansAPI.Model
 
             modelBuilder.Entity<BAssociation>(entity =>
             {
-                entity.HasKey(e => e.AssociationId);
+                entity.HasKey(e => e.AssociationId)
+                    .HasName("PK__b_Associ__B51A19CD07020F21");
 
                 entity.ToTable("b_Association");
 
@@ -166,7 +171,8 @@ namespace TitansAPI.Model
 
             modelBuilder.Entity<BAssociationAddress>(entity =>
             {
-                entity.HasKey(e => e.AssociationAddressId);
+                entity.HasKey(e => e.AssociationAddressId)
+                    .HasName("PK__b_Associ__12D1023F0AD2A005");
 
                 entity.ToTable("b_AssociationAddress");
 
@@ -213,7 +219,7 @@ namespace TitansAPI.Model
 
                 entity.Property(e => e.BankAccountName).HasMaxLength(50);
 
-                entity.Property(e => e.BankAccountNo).HasColumnType("nchar(25)");
+                entity.Property(e => e.BankAccountNo).HasMaxLength(25);
 
                 entity.Property(e => e.BankContactEmail).HasMaxLength(50);
 
@@ -231,7 +237,8 @@ namespace TitansAPI.Model
 
             modelBuilder.Entity<BAssociationContactInfo>(entity =>
             {
-                entity.HasKey(e => e.AssociationContactId);
+                entity.HasKey(e => e.AssociationContactId)
+                    .HasName("PK__b_Associ__5491A19B108B795B");
 
                 entity.ToTable("b_AssociationContactInfo");
 
@@ -278,15 +285,25 @@ namespace TitansAPI.Model
                     .HasColumnName("AssociationID")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Address).HasDefaultValueSql("((1))");
+                entity.Property(e => e.Address)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.ContactInformation).HasDefaultValueSql("((1))");
+                entity.Property(e => e.ContactInformation)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.EmergencyContact).HasDefaultValueSql("((1))");
+                entity.Property(e => e.EmergencyContact)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.OtherInfomration).HasDefaultValueSql("((1))");
+                entity.Property(e => e.OtherInfomration)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.UploadImage).HasDefaultValueSql("((1))");
+                entity.Property(e => e.UploadImage)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
 
                 entity.HasOne(d => d.Association)
                     .WithOne(p => p.BAssociationProfile)
@@ -360,261 +377,7 @@ namespace TitansAPI.Model
 
                 entity.Property(e => e.CartStatusName)
                     .IsRequired()
-                    .HasColumnType("nchar(20)");
-            });
-
-            modelBuilder.Entity<BClinic>(entity =>
-            {
-                entity.HasKey(e => e.ClinicId);
-
-                entity.ToTable("b_Clinic");
-
-                entity.Property(e => e.ClinicId).HasColumnName("ClinicID");
-
-                entity.Property(e => e.AssociationId).HasColumnName("AssociationID");
-
-                entity.Property(e => e.ClinicCity).HasMaxLength(50);
-
-                entity.Property(e => e.ClinicCountry).HasMaxLength(50);
-
-                entity.Property(e => e.ClinicEndDate).HasColumnType("datetime");
-
-                entity.Property(e => e.ClinicMemo).HasColumnType("text");
-
-                entity.Property(e => e.ClinicName).IsRequired();
-
-                entity.Property(e => e.ClinicPostalCode).HasColumnType("nchar(10)");
-
-                entity.Property(e => e.ClinicProvince).HasColumnType("nchar(10)");
-
-                entity.Property(e => e.ClinicStartDate).HasColumnType("datetime");
-
-                entity.Property(e => e.ClinicStreet1).HasMaxLength(50);
-
-                entity.Property(e => e.ClinicStreet2).HasMaxLength(50);
-
-                entity.Property(e => e.SeasonId).HasColumnName("SeasonID");
-
-                entity.HasOne(d => d.Association)
-                    .WithMany(p => p.BClinic)
-                    .HasForeignKey(d => d.AssociationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_b_Clinic_b_Association");
-            });
-
-            modelBuilder.Entity<BClinicMember>(entity =>
-            {
-                entity.HasKey(e => e.ClinicMemberId);
-
-                entity.ToTable("b_ClinicMember");
-
-                entity.Property(e => e.ClinicMemberId).HasColumnName("ClinicMemberID");
-
-                entity.Property(e => e.ClinicId).HasColumnName("ClinicID");
-
-                entity.Property(e => e.MemberId).HasColumnName("MemberID");
-
-                entity.HasOne(d => d.Clinic)
-                    .WithMany(p => p.BClinicMember)
-                    .HasForeignKey(d => d.ClinicId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_b_ClinicMember_b_Clinic");
-
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.BClinicMember)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_b_ClinicMember_b_Member");
-            });
-
-            modelBuilder.Entity<BClinicOfficials>(entity =>
-            {
-                entity.HasKey(e => e.ClinicOfficialId);
-
-                entity.ToTable("b_ClinicOfficials");
-
-                entity.Property(e => e.ClinicOfficialId).HasColumnName("ClinicOfficialID");
-
-                entity.Property(e => e.ClinicId).HasColumnName("ClinicID");
-
-                entity.Property(e => e.OfficialId).HasColumnName("OfficialID");
-
-                entity.Property(e => e.PositionId).HasColumnName("PositionID");
-
-                entity.HasOne(d => d.Clinic)
-                    .WithMany(p => p.BClinicOfficials)
-                    .HasForeignKey(d => d.ClinicId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_b_ClinicOfficials_b_Clinic");
-
-                entity.HasOne(d => d.Official)
-                    .WithMany(p => p.BClinicOfficials)
-                    .HasForeignKey(d => d.OfficialId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_b_ClinicOfficials_b_Official");
-
-                entity.HasOne(d => d.Position)
-                    .WithMany(p => p.BClinicOfficials)
-                    .HasForeignKey(d => d.PositionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_b_ClinicOfficials_b_Position");
-            });
-
-            modelBuilder.Entity<BClinicProgramAttachment>(entity =>
-            {
-                entity.HasKey(e => e.ProgramAttachmentId);
-
-                entity.ToTable("b_ClinicProgramAttachment");
-
-                entity.Property(e => e.ProgramAttachmentId).HasColumnName("ProgramAttachmentID");
-
-                entity.Property(e => e.AssociationId).HasColumnName("AssociationID");
-
-                entity.Property(e => e.ClinicProgramId).HasColumnName("ClinicProgramID");
-
-                entity.Property(e => e.ProgramDataName).HasMaxLength(50);
-
-                entity.Property(e => e.ProgramDateUploaded).HasColumnType("date");
-
-                entity.HasOne(d => d.ClinicProgram)
-                    .WithMany(p => p.BClinicProgramAttachment)
-                    .HasForeignKey(d => d.ClinicProgramId)
-                    .HasConstraintName("FK_b_ClinicProgramAttachment_b_ClinicPrograms");
-            });
-
-            modelBuilder.Entity<BClinicPrograms>(entity =>
-            {
-                entity.HasKey(e => e.ClinicProgramId);
-
-                entity.ToTable("b_ClinicPrograms");
-
-                entity.Property(e => e.ClinicProgramId).HasColumnName("ClinicProgramID");
-
-                entity.Property(e => e.ClinicProgramName)
-                    .IsRequired()
-                    .HasColumnName("ClinicProgram_Name");
-
-                entity.Property(e => e.ClinicProgramTypeId).HasColumnName("ClinicProgramTypeID");
-
-                entity.HasOne(d => d.ClinicProgramType)
-                    .WithMany(p => p.BClinicPrograms)
-                    .HasForeignKey(d => d.ClinicProgramTypeId)
-                    .HasConstraintName("FK_b_ClinicPrograms_b_ClinicProgramType");
-            });
-
-            modelBuilder.Entity<BClinicProgramTrx>(entity =>
-            {
-                entity.HasKey(e => e.ClinicProgramTrxId);
-
-                entity.ToTable("b_ClinicProgramTrx");
-
-                entity.Property(e => e.ClinicProgramTrxId).HasColumnName("ClinicProgramTrxID");
-
-                entity.Property(e => e.ClinicId).HasColumnName("ClinicID");
-
-                entity.Property(e => e.ClinicProgramId).HasColumnName("ClinicProgramID");
-
-                entity.HasOne(d => d.Clinic)
-                    .WithMany(p => p.BClinicProgramTrx)
-                    .HasForeignKey(d => d.ClinicId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_b_ClinicProgramTrx_b_Clinic");
-
-                entity.HasOne(d => d.ClinicProgram)
-                    .WithMany(p => p.BClinicProgramTrx)
-                    .HasForeignKey(d => d.ClinicProgramId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_b_ClinicProgramTrx_b_ClinicPrograms");
-            });
-
-            modelBuilder.Entity<BClinicProgramType>(entity =>
-            {
-                entity.HasKey(e => e.ClinicProgramTypeId);
-
-                entity.ToTable("b_ClinicProgramType");
-
-                entity.Property(e => e.ClinicProgramTypeId).HasColumnName("ClinicProgramTypeID");
-
-                entity.Property(e => e.ClinicProgramTypeName)
-                    .IsRequired()
-                    .HasColumnName("ClinicProgramType_Name")
-                    .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<BClinicProgramVideoLink>(entity =>
-            {
-                entity.HasKey(e => e.ClinicProgramVideoLinkId);
-
-                entity.ToTable("b_ClinicProgramVideoLink");
-
-                entity.Property(e => e.ClinicProgramVideoLinkId).HasColumnName("ClinicProgramVideoLinkID");
-
-                entity.Property(e => e.AssociationId).HasColumnName("AssociationID");
-
-                entity.Property(e => e.ClinicProgramData).HasMaxLength(150);
-
-                entity.Property(e => e.ClinicProgramId).HasColumnName("ClinicProgramID");
-
-                entity.Property(e => e.ClinicProgramUploadedById).HasColumnName("ClinicProgramUploadedByID");
-
-                entity.Property(e => e.ClinicProgramUploadedDate).HasColumnType("date");
-
-                entity.Property(e => e.ClinicProgramVideoName).HasMaxLength(150);
-
-                entity.HasOne(d => d.ClinicProgram)
-                    .WithMany(p => p.BClinicProgramVideoLink)
-                    .HasForeignKey(d => d.ClinicProgramId)
-                    .HasConstraintName("FK_b_ClinicProgramVideoLink_b_ClinicPrograms");
-            });
-
-            modelBuilder.Entity<BClinicSchedule>(entity =>
-            {
-                entity.HasKey(e => e.ClinicScheduleId);
-
-                entity.ToTable("b_ClinicSchedule");
-
-                entity.Property(e => e.ClinicScheduleId).HasColumnName("ClinicScheduleID");
-
-                entity.Property(e => e.ClinicEndTime).HasMaxLength(10);
-
-                entity.Property(e => e.ClinicId).HasColumnName("ClinicID");
-
-                entity.Property(e => e.ClinicScheduleDate).HasColumnType("date");
-
-                entity.Property(e => e.ClinicStartTime).HasMaxLength(10);
-
-                entity.HasOne(d => d.Clinic)
-                    .WithMany(p => p.BClinicSchedule)
-                    .HasForeignKey(d => d.ClinicId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_b_ClinicSchedule_b_Clinic");
-            });
-
-            modelBuilder.Entity<BClinicstaff>(entity =>
-            {
-                entity.HasKey(e => e.ClinicStaffId);
-
-                entity.ToTable("b_Clinicstaff");
-
-                entity.Property(e => e.ClinicStaffId).HasColumnName("ClinicStaff_ID");
-
-                entity.Property(e => e.ClinicId).HasColumnName("ClinicID");
-
-                entity.Property(e => e.PositionId).HasColumnName("PositionID");
-
-                entity.Property(e => e.UserId).HasColumnName("UserID");
-
-                entity.HasOne(d => d.Position)
-                    .WithMany(p => p.BClinicstaff)
-                    .HasForeignKey(d => d.PositionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_b_Clinicstaff_b_Position");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.BClinicstaff)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_b_Clinicstaff_b_Users");
+                    .HasMaxLength(20);
             });
 
             modelBuilder.Entity<BCoa>(entity =>
@@ -673,7 +436,8 @@ namespace TitansAPI.Model
 
             modelBuilder.Entity<BContactType>(entity =>
             {
-                entity.HasKey(e => e.ContactTypeId);
+                entity.HasKey(e => e.ContactTypeId)
+                    .HasName("PK__b_Contac__17E1EE7232E0915F");
 
                 entity.ToTable("b_ContactType");
 
@@ -682,6 +446,25 @@ namespace TitansAPI.Model
                 entity.Property(e => e.ContactGroupId).HasColumnName("ContactGroupID");
 
                 entity.Property(e => e.ContactTypeDesc).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<BContactUs>(entity =>
+            {
+                entity.ToTable("b_ContactUs");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.DateFrom).HasColumnType("datetime");
+
+                entity.Property(e => e.Email).HasMaxLength(250);
+
+                entity.Property(e => e.Message)
+                    .HasColumnName("message")
+                    .HasColumnType("text");
+
+                entity.Property(e => e.ResponseDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Subject).HasColumnName("subject");
             });
 
             modelBuilder.Entity<BContent>(entity =>
@@ -746,26 +529,7 @@ namespace TitansAPI.Model
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_b_ContentApproved_b_Content");
             });
-            modelBuilder.Entity<BContactUs>(entity =>
-            {
-                entity.ToTable("B_ContactUs");
 
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.DateFrom).HasColumnType("datetime");
-
-                entity.Property(e => e.Email)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Message)
-                    .HasColumnName("message")
-                    .HasColumnType("text");
-
-                entity.Property(e => e.ResponseDate).HasColumnType("datetime");
-
-                entity.Property(e => e.Subject).HasColumnName("subject");
-            });
             modelBuilder.Entity<BContentDocuments>(entity =>
             {
                 entity.HasKey(e => e.DocumentId);
@@ -801,6 +565,17 @@ namespace TitansAPI.Model
                 entity.Property(e => e.ContentTypeId).HasColumnName("ContentTypeID");
 
                 entity.Property(e => e.ContentTypeName).HasMaxLength(150);
+            });
+
+            modelBuilder.Entity<BDiscountFeeType>(entity =>
+            {
+                entity.HasKey(e => e.DiscountFeeTypeId);
+
+                entity.ToTable("b_DiscountFeeType");
+
+                entity.Property(e => e.DiscountFeeTypeId).HasColumnName("DiscountFeeTypeID");
+
+                entity.Property(e => e.DiscountFeeTypeName).HasMaxLength(50);
             });
 
             modelBuilder.Entity<BDiscountFees>(entity =>
@@ -842,20 +617,10 @@ namespace TitansAPI.Model
                     .HasConstraintName("FK_b_DiscountFees_b_Season");
             });
 
-            modelBuilder.Entity<BDiscountFeeType>(entity =>
-            {
-                entity.HasKey(e => e.DiscountFeeTypeId);
-
-                entity.ToTable("b_DiscountFeeType");
-
-                entity.Property(e => e.DiscountFeeTypeId).HasColumnName("DiscountFeeTypeID");
-
-                entity.Property(e => e.DiscountFeeTypeName).HasMaxLength(50);
-            });
-
             modelBuilder.Entity<BDivision>(entity =>
             {
-                entity.HasKey(e => e.DivisionId);
+                entity.HasKey(e => e.DivisionId)
+                    .HasName("PK__b_Divisi__20EFC688440B1D61");
 
                 entity.ToTable("b_Division");
 
@@ -877,7 +642,12 @@ namespace TitansAPI.Model
 
                 entity.Property(e => e.GenderId)
                     .HasColumnName("GenderID")
-                    .HasColumnType("char(1)");
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MaximumAge).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.MinimumAge).HasColumnType("decimal(18, 2)");
             });
 
             modelBuilder.Entity<BEventAddress>(entity =>
@@ -890,7 +660,7 @@ namespace TitansAPI.Model
 
                 entity.Property(e => e.EventCity).HasMaxLength(50);
 
-                entity.Property(e => e.EventPostalCode).HasColumnType("nchar(10)");
+                entity.Property(e => e.EventPostalCode).HasMaxLength(10);
 
                 entity.Property(e => e.EventProvince).HasMaxLength(15);
 
@@ -918,60 +688,6 @@ namespace TitansAPI.Model
                     .WithMany(p => p.BEventDivision)
                     .HasForeignKey(d => d.EventNo)
                     .HasConstraintName("FK_b_EventDivision_b_Events");
-            });
-
-            modelBuilder.Entity<BEvents>(entity =>
-            {
-                entity.HasKey(e => e.EventNo);
-
-                entity.ToTable("b_Events");
-
-                entity.Property(e => e.AssociationId).HasColumnName("AssociationID");
-
-                entity.Property(e => e.CreatedDate).HasColumnType("date");
-
-                entity.Property(e => e.EventConfirmationLastDate).HasColumnType("datetime");
-
-                entity.Property(e => e.EventContactEmail).HasMaxLength(50);
-
-                entity.Property(e => e.EventContactName).HasMaxLength(50);
-
-                entity.Property(e => e.EventContactNo).HasMaxLength(25);
-
-                entity.Property(e => e.EventCost).HasColumnType("money");
-
-                entity.Property(e => e.EventDescription).IsRequired();
-
-                entity.Property(e => e.EventEndDate).HasColumnType("date");
-
-                entity.Property(e => e.EventEndTime).HasColumnType("nchar(10)");
-
-                entity.Property(e => e.EventHost).HasMaxLength(150);
-
-                entity.Property(e => e.EventPosition).HasMaxLength(50);
-
-                entity.Property(e => e.EventStartDate).HasColumnType("date");
-
-                entity.Property(e => e.EventStartTime).HasColumnType("nchar(10)");
-
-                entity.Property(e => e.PostEventMemo).HasColumnType("text");
-
-                entity.Property(e => e.PostedById).HasColumnName("PostedByID");
-
-                entity.Property(e => e.PreEventMemo).HasColumnType("text");
-
-                entity.Property(e => e.SeasonId).HasColumnName("SeasonID");
-
-                entity.HasOne(d => d.Association)
-                    .WithMany(p => p.BEvents)
-                    .HasForeignKey(d => d.AssociationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_b_Events_b_Association");
-
-                entity.HasOne(d => d.EventTypeNavigation)
-                    .WithMany(p => p.BEvents)
-                    .HasForeignKey(d => d.EventType)
-                    .HasConstraintName("FK_b_Events_b_EventType");
             });
 
             modelBuilder.Entity<BEventTeamConfirmation>(entity =>
@@ -1033,22 +749,58 @@ namespace TitansAPI.Model
                 entity.Property(e => e.EventTypeName).HasMaxLength(50);
             });
 
-            modelBuilder.Entity<BFees>(entity =>
+            modelBuilder.Entity<BEvents>(entity =>
             {
-                entity.HasKey(e => e.FeeId);
+                entity.HasKey(e => e.EventNo);
 
-                entity.ToTable("b_Fees");
+                entity.ToTable("b_Events");
 
-                entity.Property(e => e.FeeId).HasColumnName("FeeID");
+                entity.Property(e => e.AssociationId).HasColumnName("AssociationID");
 
-                entity.Property(e => e.FeeName).HasMaxLength(150);
+                entity.Property(e => e.CreatedDate).HasColumnType("date");
 
-                entity.Property(e => e.FeeTypeId).HasColumnName("FeeTypeID");
+                entity.Property(e => e.EventConfirmationLastDate).HasColumnType("datetime");
 
-                entity.HasOne(d => d.FeeType)
-                    .WithMany(p => p.BFees)
-                    .HasForeignKey(d => d.FeeTypeId)
-                    .HasConstraintName("FK_b_Fees_b_FeeType");
+                entity.Property(e => e.EventContactEmail).HasMaxLength(50);
+
+                entity.Property(e => e.EventContactName).HasMaxLength(50);
+
+                entity.Property(e => e.EventContactNo).HasMaxLength(25);
+
+                entity.Property(e => e.EventCost).HasColumnType("money");
+
+                entity.Property(e => e.EventDescription).IsRequired();
+
+                entity.Property(e => e.EventEndDate).HasColumnType("date");
+
+                entity.Property(e => e.EventEndTime).HasMaxLength(10);
+
+                entity.Property(e => e.EventHost).HasMaxLength(150);
+
+                entity.Property(e => e.EventPosition).HasMaxLength(50);
+
+                entity.Property(e => e.EventStartDate).HasColumnType("date");
+
+                entity.Property(e => e.EventStartTime).HasMaxLength(10);
+
+                entity.Property(e => e.PostEventMemo).HasColumnType("text");
+
+                entity.Property(e => e.PostedById).HasColumnName("PostedByID");
+
+                entity.Property(e => e.PreEventMemo).HasColumnType("text");
+
+                entity.Property(e => e.SeasonId).HasColumnName("SeasonID");
+
+                entity.HasOne(d => d.Association)
+                    .WithMany(p => p.BEvents)
+                    .HasForeignKey(d => d.AssociationId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_b_Events_b_Association");
+
+                entity.HasOne(d => d.EventTypeNavigation)
+                    .WithMany(p => p.BEvents)
+                    .HasForeignKey(d => d.EventType)
+                    .HasConstraintName("FK_b_Events_b_EventType");
             });
 
             modelBuilder.Entity<BFeeTrx>(entity =>
@@ -1061,27 +813,17 @@ namespace TitansAPI.Model
 
                 entity.Property(e => e.AssociationId).HasColumnName("AssociationID");
 
-                entity.Property(e => e.FeeAmount)
-                    .HasColumnType("money")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.FeeAmount).HasColumnType("money");
 
                 entity.Property(e => e.FeeId).HasColumnName("FeeID");
 
-                entity.Property(e => e.Gst)
-                    .HasColumnName("GST")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.Gst).HasColumnName("GST");
 
-                entity.Property(e => e.Hst)
-                    .HasColumnName("HST")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.Hst).HasColumnName("HST");
 
-                entity.Property(e => e.Pst)
-                    .HasColumnName("PST")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.Pst).HasColumnName("PST");
 
-                entity.Property(e => e.Qst)
-                    .HasColumnName("QST")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.Qst).HasColumnName("QST");
 
                 entity.Property(e => e.SeasonId).HasColumnName("SeasonID");
 
@@ -1108,6 +850,24 @@ namespace TitansAPI.Model
                 entity.Property(e => e.FeeTypeName)
                     .IsRequired()
                     .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<BFees>(entity =>
+            {
+                entity.HasKey(e => e.FeeId);
+
+                entity.ToTable("b_Fees");
+
+                entity.Property(e => e.FeeId).HasColumnName("FeeID");
+
+                entity.Property(e => e.FeeName).HasMaxLength(150);
+
+                entity.Property(e => e.FeeTypeId).HasColumnName("FeeTypeID");
+
+                entity.HasOne(d => d.FeeType)
+                    .WithMany(p => p.BFees)
+                    .HasForeignKey(d => d.FeeTypeId)
+                    .HasConstraintName("FK_b_Fees_b_FeeType");
             });
 
             modelBuilder.Entity<BGymInfo>(entity =>
@@ -1152,7 +912,8 @@ namespace TitansAPI.Model
 
             modelBuilder.Entity<BLeagueSchedule>(entity =>
             {
-                entity.HasKey(e => e.LeagueScheduleId);
+                entity.HasKey(e => e.LeagueScheduleId)
+                    .HasName("PK_b_LeagueSchedule");
 
                 entity.ToTable("b_leagueSchedule");
 
@@ -1197,7 +958,8 @@ namespace TitansAPI.Model
 
             modelBuilder.Entity<BMember>(entity =>
             {
-                entity.HasKey(e => e.MemberId);
+                entity.HasKey(e => e.MemberId)
+                    .HasName("PK__b_Member__0CF04B385EBF139D");
 
                 entity.ToTable("b_Member");
 
@@ -1215,7 +977,9 @@ namespace TitansAPI.Model
 
                 entity.Property(e => e.Gender).HasMaxLength(10);
 
-                entity.Property(e => e.JerseyNo).HasColumnType("char(5)");
+                entity.Property(e => e.JerseyNo)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Language).HasMaxLength(10);
 
@@ -1249,49 +1013,10 @@ namespace TitansAPI.Model
                     .HasConstraintName("FK_b_Member_b_Users");
             });
 
-            modelBuilder.Entity<BMemberaddress>(entity =>
-            {
-                entity.HasKey(e => e.MemberAddressId);
-
-                entity.ToTable("b_Memberaddress");
-
-                entity.Property(e => e.MemberAddressId).HasColumnName("MemberAddressID");
-
-                entity.Property(e => e.AddressTypeId).HasColumnName("AddressTypeID");
-
-                entity.Property(e => e.MemberCity).HasMaxLength(25);
-
-                entity.Property(e => e.MemberCountry).HasMaxLength(25);
-
-                entity.Property(e => e.MemberCreateUserId).HasColumnName("MemberCreateUserID");
-
-                entity.Property(e => e.MemberDateCreated).HasColumnType("datetime");
-
-                entity.Property(e => e.MemberDateUpdated).HasColumnType("datetime");
-
-                entity.Property(e => e.MemberId).HasColumnName("MemberID");
-
-                entity.Property(e => e.MemberPostalCode).HasMaxLength(10);
-
-                entity.Property(e => e.MemberProvince).HasMaxLength(5);
-
-                entity.Property(e => e.MemberStreetName).HasMaxLength(25);
-
-                entity.Property(e => e.MemberStreetNo).HasMaxLength(10);
-
-                entity.Property(e => e.MemberStreetType).HasMaxLength(25);
-
-                entity.Property(e => e.MemberUpdateUserId).HasColumnName("MemberUpdateUserID");
-
-                entity.HasOne(d => d.AddressType)
-                    .WithMany(p => p.BMemberaddress)
-                    .HasForeignKey(d => d.AddressTypeId)
-                    .HasConstraintName("FK_b_Memberaddress_b_AddressType");
-            });
-
             modelBuilder.Entity<BMemberContactInfo>(entity =>
             {
-                entity.HasKey(e => e.MemberContactId);
+                entity.HasKey(e => e.MemberContactId)
+                    .HasName("PK__b_Member__6882F48866603565");
 
                 entity.ToTable("b_MemberContactInfo");
 
@@ -1393,29 +1118,19 @@ namespace TitansAPI.Model
 
                 entity.Property(e => e.MemberFeeId).HasColumnName("MemberFeeID");
 
-                entity.Property(e => e.FeeAmount)
-                    .HasColumnType("money")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.FeeAmount).HasColumnType("money");
 
                 entity.Property(e => e.FeeTrxId).HasColumnName("FeeTrxID");
 
-                entity.Property(e => e.Gst)
-                    .HasColumnName("GST")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.Gst).HasColumnName("GST");
 
-                entity.Property(e => e.Hst)
-                    .HasColumnName("HST")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.Hst).HasColumnName("HST");
 
                 entity.Property(e => e.MemberRegId).HasColumnName("MemberRegID");
 
-                entity.Property(e => e.Pst)
-                    .HasColumnName("PST")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.Pst).HasColumnName("PST");
 
-                entity.Property(e => e.Qst)
-                    .HasColumnName("QST")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.Qst).HasColumnName("QST");
 
                 entity.Property(e => e.TotalFee).HasColumnType("money");
 
@@ -1530,6 +1245,47 @@ namespace TitansAPI.Model
                     .HasConstraintName("FK_b_MemberServiceFee_b_ServicesFee");
             });
 
+            modelBuilder.Entity<BMemberaddress>(entity =>
+            {
+                entity.HasKey(e => e.MemberAddressId)
+                    .HasName("PK__b_Member__AD5BA651628FA481");
+
+                entity.ToTable("b_Memberaddress");
+
+                entity.Property(e => e.MemberAddressId).HasColumnName("MemberAddressID");
+
+                entity.Property(e => e.AddressTypeId).HasColumnName("AddressTypeID");
+
+                entity.Property(e => e.MemberCity).HasMaxLength(25);
+
+                entity.Property(e => e.MemberCountry).HasMaxLength(25);
+
+                entity.Property(e => e.MemberCreateUserId).HasColumnName("MemberCreateUserID");
+
+                entity.Property(e => e.MemberDateCreated).HasColumnType("datetime");
+
+                entity.Property(e => e.MemberDateUpdated).HasColumnType("datetime");
+
+                entity.Property(e => e.MemberId).HasColumnName("MemberID");
+
+                entity.Property(e => e.MemberPostalCode).HasMaxLength(10);
+
+                entity.Property(e => e.MemberProvince).HasMaxLength(5);
+
+                entity.Property(e => e.MemberStreetName).HasMaxLength(25);
+
+                entity.Property(e => e.MemberStreetNo).HasMaxLength(10);
+
+                entity.Property(e => e.MemberStreetType).HasMaxLength(25);
+
+                entity.Property(e => e.MemberUpdateUserId).HasColumnName("MemberUpdateUserID");
+
+                entity.HasOne(d => d.AddressType)
+                    .WithMany(p => p.BMemberaddress)
+                    .HasForeignKey(d => d.AddressTypeId)
+                    .HasConstraintName("FK_b_Memberaddress_b_AddressType");
+            });
+
             modelBuilder.Entity<BOfficial>(entity =>
             {
                 entity.HasKey(e => e.OfficialId);
@@ -1540,13 +1296,13 @@ namespace TitansAPI.Model
 
                 entity.Property(e => e.AssociationId).HasColumnName("AssociationID");
 
-                entity.Property(e => e.CellPhone).HasColumnType("nchar(15)");
+                entity.Property(e => e.CellPhone).HasMaxLength(15);
 
                 entity.Property(e => e.EmailAddress).HasMaxLength(50);
 
                 entity.Property(e => e.Gender)
                     .IsRequired()
-                    .HasColumnType("nchar(1)");
+                    .HasMaxLength(1);
 
                 entity.Property(e => e.Notes).HasColumnType("text");
 
@@ -1564,7 +1320,7 @@ namespace TitansAPI.Model
 
                 entity.Property(e => e.PositionId).HasColumnName("PositionID");
 
-                entity.Property(e => e.TelNo).HasColumnType("nchar(15)");
+                entity.Property(e => e.TelNo).HasMaxLength(15);
 
                 entity.HasOne(d => d.OfficialStatus)
                     .WithMany(p => p.BOfficial)
@@ -1609,8 +1365,7 @@ namespace TitansAPI.Model
 
                 entity.Property(e => e.Oramount)
                     .HasColumnName("ORAmount")
-                    .HasColumnType("money")
-                    .HasDefaultValueSql("((0))");
+                    .HasColumnType("money");
 
                 entity.Property(e => e.OrapplicationId).HasColumnName("ORApplicationID");
 
@@ -1680,7 +1435,7 @@ namespace TitansAPI.Model
 
                 entity.Property(e => e.PaymentStatusName)
                     .IsRequired()
-                    .HasColumnType("nchar(25)");
+                    .HasMaxLength(25);
             });
 
             modelBuilder.Entity<BPaymentType>(entity =>
@@ -1693,7 +1448,7 @@ namespace TitansAPI.Model
 
                 entity.Property(e => e.PaymentTypeName)
                     .IsRequired()
-                    .HasColumnType("nchar(20)");
+                    .HasMaxLength(20);
             });
 
             modelBuilder.Entity<BPicture>(entity =>
@@ -1756,8 +1511,7 @@ namespace TitansAPI.Model
 
                 entity.Property(e => e.Oramount)
                     .HasColumnName("ORAmount")
-                    .HasColumnType("money")
-                    .HasDefaultValueSql("((0))");
+                    .HasColumnType("money");
 
                 entity.Property(e => e.Ordate)
                     .HasColumnName("ORDate")
@@ -1779,9 +1533,7 @@ namespace TitansAPI.Model
                     .HasColumnType("smalldatetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.ReceiptAmount)
-                    .HasColumnType("money")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.ReceiptAmount).HasColumnType("money");
 
                 entity.Property(e => e.ReceiptDate).HasColumnType("smalldatetime");
 
@@ -1821,9 +1573,9 @@ namespace TitansAPI.Model
 
                 entity.Property(e => e.ScheduleDate).HasColumnType("date");
 
-                entity.Property(e => e.ScheduleEndTime).HasColumnType("nchar(10)");
+                entity.Property(e => e.ScheduleEndTime).HasMaxLength(10);
 
-                entity.Property(e => e.ScheduleStartTime).HasColumnType("nchar(10)");
+                entity.Property(e => e.ScheduleStartTime).HasMaxLength(10);
 
                 entity.Property(e => e.ScheduleTypeId).HasColumnName("ScheduleTypeID");
             });
@@ -1843,7 +1595,8 @@ namespace TitansAPI.Model
 
             modelBuilder.Entity<BSeason>(entity =>
             {
-                entity.HasKey(e => e.SeasonId);
+                entity.HasKey(e => e.SeasonId)
+                    .HasName("PK__b_Season__C1814E180E6E26BF");
 
                 entity.ToTable("b_Season");
 
@@ -1881,9 +1634,7 @@ namespace TitansAPI.Model
                     .IsRequired()
                     .HasMaxLength(4);
 
-                entity.Property(e => e.Amount)
-                    .HasColumnType("money")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.Amount).HasColumnType("money");
 
                 entity.Property(e => e.AssociationId).HasColumnName("AssociationID");
 
@@ -2001,7 +1752,8 @@ namespace TitansAPI.Model
 
             modelBuilder.Entity<BTeam>(entity =>
             {
-                entity.HasKey(e => e.TeamId);
+                entity.HasKey(e => e.TeamId)
+                    .HasName("PK__b_Team__123AE7B91F98B2C1");
 
                 entity.ToTable("b_Team");
 
@@ -2022,6 +1774,10 @@ namespace TitansAPI.Model
                 entity.Property(e => e.DivisionId).HasColumnName("DivisionID");
 
                 entity.Property(e => e.IsPibnateam).HasColumnName("IsPIBNATeam");
+
+                entity.Property(e => e.MaxAge).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.MinAge).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.SeasonId).HasColumnName("SeasonID");
 
@@ -2044,7 +1800,8 @@ namespace TitansAPI.Model
 
             modelBuilder.Entity<BTeamContact>(entity =>
             {
-                entity.HasKey(e => e.TeamContactId);
+                entity.HasKey(e => e.TeamContactId)
+                    .HasName("PK__b_TeamCo__051F9D2D236943A5");
 
                 entity.ToTable("b_TeamContact");
 
@@ -2085,6 +1842,37 @@ namespace TitansAPI.Model
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_b_TeamDiscussion_b_Users");
+            });
+
+            modelBuilder.Entity<BTeamGame>(entity =>
+            {
+                entity.HasKey(e => e.TeamGameId);
+
+                entity.ToTable("b_TeamGame");
+
+                entity.Property(e => e.DatePlayed).HasColumnType("date");
+
+                entity.Property(e => e.EndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.FromDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.TeamVsName)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.HasOne(d => d.PostedBy)
+                    .WithMany(p => p.BTeamGame)
+                    .HasForeignKey(d => d.PostedById)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_b_TeamGame_b_Users");
+
+                entity.HasOne(d => d.Team)
+                    .WithMany(p => p.BTeamGame)
+                    .HasForeignKey(d => d.TeamId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_b_TeamGame_b_Team");
             });
 
             modelBuilder.Entity<BTeamOfficial>(entity =>
@@ -2141,34 +1929,28 @@ namespace TitansAPI.Model
                     .HasConstraintName("FK_b_TeamPlayers_b_Team");
             });
 
-            modelBuilder.Entity<BTeamProgram>(entity =>
+            modelBuilder.Entity<BTeamStat>(entity =>
             {
-                entity.HasKey(e => e.TeamProgramId);
+                entity.HasKey(e => e.TeamStatId);
 
-                entity.ToTable("b_TeamProgram");
+                entity.ToTable("b_TeamStat");
 
-                entity.Property(e => e.TeamProgramId).HasColumnName("TeamProgramID");
-
-                entity.Property(e => e.ClinicProgramId).HasColumnName("ClinicProgramID");
-
-                entity.Property(e => e.TeamId).HasColumnName("TeamID");
-
-                entity.HasOne(d => d.ClinicProgram)
-                    .WithMany(p => p.BTeamProgram)
-                    .HasForeignKey(d => d.ClinicProgramId)
+                entity.HasOne(d => d.Member)
+                    .WithMany(p => p.BTeamStat)
+                    .HasForeignKey(d => d.MemberId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_b_TeamProgram_b_ClinicPrograms");
+                    .HasConstraintName("FK_b_TeamStat_b_Member");
 
-                entity.HasOne(d => d.Team)
-                    .WithMany(p => p.BTeamProgram)
-                    .HasForeignKey(d => d.TeamId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_b_TeamProgram_b_Team");
+                entity.HasOne(d => d.TeamGame)
+                    .WithMany(p => p.BTeamStat)
+                    .HasForeignKey(d => d.TeamGameId)
+                    .HasConstraintName("FK_b_TeamStat_b_TeamGame");
             });
 
             modelBuilder.Entity<BTvMenu>(entity =>
             {
-                entity.HasKey(e => e.TvMenuId);
+                entity.HasKey(e => e.TvMenuId)
+                    .HasName("PK_t_tvMenu");
 
                 entity.ToTable("b_tvMenu");
 
@@ -2191,9 +1973,47 @@ namespace TitansAPI.Model
                     .HasMaxLength(100);
             });
 
+            modelBuilder.Entity<BUpload>(entity =>
+            {
+                entity.HasKey(e => e.UploadId)
+                    .HasName("PK_Upload");
+
+                entity.ToTable("b_Upload");
+
+                entity.Property(e => e.EndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.FromDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ImagePath)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.Type)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<BUserType>(entity =>
+            {
+                entity.HasKey(e => e.UserTypeId);
+
+                entity.ToTable("b_UserType");
+
+                entity.Property(e => e.UserTypeId).HasColumnName("UserTypeID");
+
+                entity.Property(e => e.UserTypeName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+            });
+
             modelBuilder.Entity<BUsers>(entity =>
             {
-                entity.HasKey(e => e.UserId);
+                entity.HasKey(e => e.UserId)
+                    .HasName("PK__b_Users__1788CCAC367C1819");
 
                 entity.ToTable("b_Users");
 
@@ -2261,19 +2081,6 @@ namespace TitansAPI.Model
                     .HasConstraintName("FK_b_Users_b_UserType");
             });
 
-            modelBuilder.Entity<BUserType>(entity =>
-            {
-                entity.HasKey(e => e.UserTypeId);
-
-                entity.ToTable("b_UserType");
-
-                entity.Property(e => e.UserTypeId).HasColumnName("UserTypeID");
-
-                entity.Property(e => e.UserTypeName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
             modelBuilder.Entity<BWaiver>(entity =>
             {
                 entity.HasKey(e => e.WaiverId);
@@ -2293,38 +2100,6 @@ namespace TitansAPI.Model
                 entity.Property(e => e.WaiverTitle)
                     .IsRequired()
                     .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<BUpload>(entity =>
-            {
-                entity.HasKey(e => e.UploadId);
-
-                entity.ToTable("b_Upload");
-
-                entity.Property(e => e.UploadId).HasColumnName("UploadId");
-                entity.Property(e => e.Name).HasColumnName("Name")
-                    .IsRequired()
-                    .HasMaxLength(250);
-
-                entity.Property(e => e.Type)
-                    .IsRequired()
-                    .HasColumnName("type");
-
-                entity.Property(e => e.Description)
-                    .HasColumnName("Description");
-                entity.Property(e => e.DivisionId)
-                  .HasColumnName("DivisionId");
-
-
-                entity.Property(e => e.FromDate).HasColumnType("datetime");
-
-                entity.Property(e => e.EndDate).HasColumnType("datetime");
-                entity.Property(e => e.SeasonId).HasColumnType("SeasonId");
-
-                entity.Property(e => e.ImagePath)
-                    .HasColumnName("ImagePath")
-                    .IsRequired()
-                    .HasMaxLength(100);
             });
         }
     }

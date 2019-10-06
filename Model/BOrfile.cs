@@ -21,6 +21,6 @@ namespace TitansAPI.Model
         public int SeasonId { get; set; }
         public int AssociationId { get; set; }
 
-        public ICollection<BOrtrx> BOrtrx { get; set; }
+        public virtual ICollection<BOrtrx> BOrtrx { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace TitansAPI.Model
         public int? AppprovedId { get; set; }
         public DateTime? DateApproved { get; set; }
 
-        public BSiteApprover Appproved { get; set; }
-        public BContent Content { get; set; }
+        public virtual BSiteApprover Appproved { get; set; }
+        public virtual BContent Content { get; set; }
     }
 }

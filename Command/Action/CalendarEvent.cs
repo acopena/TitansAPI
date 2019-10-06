@@ -14,7 +14,7 @@ namespace TitansAPI.Command.Action
         public async Task<List<CalendarModel>> GetCalendarList()
         {
             List<CalendarModel> List = new List<CalendarModel>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 DateTime today = DateTime.Now.AddDays(-60);
 
@@ -37,7 +37,7 @@ namespace TitansAPI.Command.Action
 
         public async Task GetRemoveCalendar(int id)
         {
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var calendar = await ctx.BCalendar.Where(s => s.CalendarId == id).FirstOrDefaultAsync();
                 if (calendar != null)
@@ -58,7 +58,7 @@ namespace TitansAPI.Command.Action
         public async Task PostCalendar(CalendarModel src)
         {
             CalendarModel model = new CalendarModel();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
 
                 var data = await ctx.BCalendar
@@ -92,7 +92,7 @@ namespace TitansAPI.Command.Action
 
         public async Task DeleteSchedule(int id)
         {
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var data = await ctx.BCalendar
                      .Where(s => s.CalendarId == id)

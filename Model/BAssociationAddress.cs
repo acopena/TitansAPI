@@ -16,7 +16,7 @@ namespace TitansAPI.Model
         public int? AssociationId { get; set; }
         public int? AddressTypeId { get; set; }
 
-        public BAddressType AddressType { get; set; }
-        public BAssociation Association { get; set; }
+        public virtual BAddressType AddressType { get; set; }
+        public virtual BAssociation Association { get; set; }
     }
 }

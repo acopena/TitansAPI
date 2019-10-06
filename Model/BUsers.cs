@@ -8,11 +8,11 @@ namespace TitansAPI.Model
         public BUsers()
         {
             BCart = new HashSet<BCart>();
-            BClinicstaff = new HashSet<BClinicstaff>();
             BCoachSchedule = new HashSet<BCoachSchedule>();
             BMember = new HashSet<BMember>();
             BMemberRegistration = new HashSet<BMemberRegistration>();
             BTeamDiscussion = new HashSet<BTeamDiscussion>();
+            BTeamGame = new HashSet<BTeamGame>();
         }
 
         public int UserId { get; set; }
@@ -40,13 +40,13 @@ namespace TitansAPI.Model
         public string CellPhone { get; set; }
         public bool? BlockAccount { get; set; }
 
-        public BAssociation Association { get; set; }
-        public BUserType UserType { get; set; }
-        public ICollection<BCart> BCart { get; set; }
-        public ICollection<BClinicstaff> BClinicstaff { get; set; }
-        public ICollection<BCoachSchedule> BCoachSchedule { get; set; }
-        public ICollection<BMember> BMember { get; set; }
-        public ICollection<BMemberRegistration> BMemberRegistration { get; set; }
-        public ICollection<BTeamDiscussion> BTeamDiscussion { get; set; }
+        public virtual BAssociation Association { get; set; }
+        public virtual BUserType UserType { get; set; }
+        public virtual ICollection<BCart> BCart { get; set; }
+        public virtual ICollection<BCoachSchedule> BCoachSchedule { get; set; }
+        public virtual ICollection<BMember> BMember { get; set; }
+        public virtual ICollection<BMemberRegistration> BMemberRegistration { get; set; }
+        public virtual ICollection<BTeamDiscussion> BTeamDiscussion { get; set; }
+        public virtual ICollection<BTeamGame> BTeamGame { get; set; }
     }
 }

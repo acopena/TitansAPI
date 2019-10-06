@@ -13,6 +13,6 @@ namespace TitansAPI.Model
         public int ServicesTypeId { get; set; }
         public string ServicesTypeDesc { get; set; }
 
-        public ICollection<BServicesFee> BServicesFee { get; set; }
+        public virtual ICollection<BServicesFee> BServicesFee { get; set; }
     }
 }

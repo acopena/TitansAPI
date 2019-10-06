@@ -7,11 +7,11 @@ namespace TitansAPI.Model
     {
         public BMember()
         {
-            BClinicMember = new HashSet<BClinicMember>();
             BMemberContactInfo = new HashSet<BMemberContactInfo>();
             BMemberEmergencyContact = new HashSet<BMemberEmergencyContact>();
             BMemberRegistration = new HashSet<BMemberRegistration>();
             BTeamPlayers = new HashSet<BTeamPlayers>();
+            BTeamStat = new HashSet<BTeamStat>();
         }
 
         public int MemberId { get; set; }
@@ -32,13 +32,13 @@ namespace TitansAPI.Model
         public bool? BlockAccount { get; set; }
         public string Address { get; set; }
 
-        public BAssociation Association { get; set; }
-        public BStatus Status { get; set; }
-        public BUsers User { get; set; }
-        public ICollection<BClinicMember> BClinicMember { get; set; }
-        public ICollection<BMemberContactInfo> BMemberContactInfo { get; set; }
-        public ICollection<BMemberEmergencyContact> BMemberEmergencyContact { get; set; }
-        public ICollection<BMemberRegistration> BMemberRegistration { get; set; }
-        public ICollection<BTeamPlayers> BTeamPlayers { get; set; }
+        public virtual BAssociation Association { get; set; }
+        public virtual BStatus Status { get; set; }
+        public virtual BUsers User { get; set; }
+        public virtual ICollection<BMemberContactInfo> BMemberContactInfo { get; set; }
+        public virtual ICollection<BMemberEmergencyContact> BMemberEmergencyContact { get; set; }
+        public virtual ICollection<BMemberRegistration> BMemberRegistration { get; set; }
+        public virtual ICollection<BTeamPlayers> BTeamPlayers { get; set; }
+        public virtual ICollection<BTeamStat> BTeamStat { get; set; }
     }
 }

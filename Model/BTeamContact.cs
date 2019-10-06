@@ -9,6 +9,6 @@ namespace TitansAPI.Model
         public int? TeamId { get; set; }
         public int? ContactId { get; set; }
 
-        public BTeam Team { get; set; }
+        public virtual BTeam Team { get; set; }
     }
 }

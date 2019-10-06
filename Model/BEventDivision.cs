@@ -9,6 +9,6 @@ namespace TitansAPI.Model
         public int DivisionId { get; set; }
         public int EventNo { get; set; }
 
-        public BEvents EventNoNavigation { get; set; }
+        public virtual BEvents EventNoNavigation { get; set; }
     }
 }

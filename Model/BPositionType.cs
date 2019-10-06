@@ -13,6 +13,6 @@ namespace TitansAPI.Model
         public int PositionTypeId { get; set; }
         public string PositionTypeName { get; set; }
 
-        public ICollection<BPosition> BPosition { get; set; }
+        public virtual ICollection<BPosition> BPosition { get; set; }
     }
 }

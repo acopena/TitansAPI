@@ -36,11 +36,11 @@ namespace TitansAPI.Model
         public DateTime? EventConfirmationLastDate { get; set; }
         public decimal? EventCost { get; set; }
 
-        public BAssociation Association { get; set; }
-        public BEventType EventTypeNavigation { get; set; }
-        public ICollection<BEventAddress> BEventAddress { get; set; }
-        public ICollection<BEventDivision> BEventDivision { get; set; }
-        public ICollection<BEventTeams> BEventTeams { get; set; }
-        public ICollection<BLeagueSchedule> BLeagueSchedule { get; set; }
+        public virtual BAssociation Association { get; set; }
+        public virtual BEventType EventTypeNavigation { get; set; }
+        public virtual ICollection<BEventAddress> BEventAddress { get; set; }
+        public virtual ICollection<BEventDivision> BEventDivision { get; set; }
+        public virtual ICollection<BEventTeams> BEventTeams { get; set; }
+        public virtual ICollection<BLeagueSchedule> BLeagueSchedule { get; set; }
     }
 }

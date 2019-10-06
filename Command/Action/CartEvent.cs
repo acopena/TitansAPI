@@ -14,7 +14,7 @@ namespace TitansAPI.Command.Action
         public async Task<CartModel> GetCart(int userId)
         {
             CartModel cart  = new CartModel();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var userInfo = await ctx.BUsers.Where(s => s.UserId == userId).Select(s=>s).FirstOrDefaultAsync();
 
@@ -63,7 +63,7 @@ namespace TitansAPI.Command.Action
         public async Task<CartModel> GetNewCart(int userId, int seasonId)
         {
             CartModel cart = new CartModel();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 Guid cartGuid = new Guid();
                 BCart  _cart = new BCart();

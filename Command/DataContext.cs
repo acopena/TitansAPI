@@ -12,7 +12,7 @@ namespace TitansAPI.Command
 
             //List<CalendarModel> List = new List<CalendarModel>();
             TReturn value  =  DefaultValue ;
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                // value = ctx.BCalendar;
                         

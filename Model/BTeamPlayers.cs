@@ -11,7 +11,7 @@ namespace TitansAPI.Model
         public DateTime DateJoined { get; set; }
         public int PostedById { get; set; }
 
-        public BMember Member { get; set; }
-        public BTeam Team { get; set; }
+        public virtual BMember Member { get; set; }
+        public virtual BTeam Team { get; set; }
     }
 }

@@ -18,9 +18,9 @@ namespace TitansAPI.Model
         public decimal? DiscountFeeAmount { get; set; }
         public int DiscountFeeTypeId { get; set; }
 
-        public BAssociation Association { get; set; }
-        public BDiscountFeeType DiscountFeeType { get; set; }
-        public BSeason Season { get; set; }
-        public ICollection<BMemberDiscount> BMemberDiscount { get; set; }
+        public virtual BAssociation Association { get; set; }
+        public virtual BDiscountFeeType DiscountFeeType { get; set; }
+        public virtual BSeason Season { get; set; }
+        public virtual ICollection<BMemberDiscount> BMemberDiscount { get; set; }
     }
 }

@@ -13,8 +13,8 @@ namespace TitansAPI.Model
         public decimal? DiscountFeeAmount { get; set; }
         public int DiscountFeeTypeId { get; set; }
 
-        public BCart CartGu { get; set; }
-        public BDiscountFees DiscountFee { get; set; }
-        public BMemberRegistration MemberReg { get; set; }
+        public virtual BCart CartGu { get; set; }
+        public virtual BDiscountFees DiscountFee { get; set; }
+        public virtual BMemberRegistration MemberReg { get; set; }
     }
 }

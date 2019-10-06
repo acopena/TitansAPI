@@ -21,12 +21,12 @@ namespace TitansAPI.Model
         public int? SeasonId { get; set; }
         public int? AssociationId { get; set; }
 
-        public BCartStatus CartStatus { get; set; }
-        public BUsers User { get; set; }
-        public ICollection<BMemberDiscount> BMemberDiscount { get; set; }
-        public ICollection<BMemberFees> BMemberFees { get; set; }
-        public ICollection<BMemberRegistration> BMemberRegistration { get; set; }
-        public ICollection<BMemberServiceFee> BMemberServiceFee { get; set; }
-        public ICollection<BReceipt> BReceipt { get; set; }
+        public virtual BCartStatus CartStatus { get; set; }
+        public virtual BUsers User { get; set; }
+        public virtual ICollection<BMemberDiscount> BMemberDiscount { get; set; }
+        public virtual ICollection<BMemberFees> BMemberFees { get; set; }
+        public virtual ICollection<BMemberRegistration> BMemberRegistration { get; set; }
+        public virtual ICollection<BMemberServiceFee> BMemberServiceFee { get; set; }
+        public virtual ICollection<BReceipt> BReceipt { get; set; }
     }
 }

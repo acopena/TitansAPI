@@ -13,6 +13,6 @@ namespace TitansAPI.Model
         public int PaymentTypeId { get; set; }
         public string PaymentTypeName { get; set; }
 
-        public ICollection<BReceipt> BReceipt { get; set; }
+        public virtual ICollection<BReceipt> BReceipt { get; set; }
     }
 }

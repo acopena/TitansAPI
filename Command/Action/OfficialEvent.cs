@@ -16,7 +16,7 @@ namespace TitansAPI.Command.Action
         {
             var model = new OfficialPageModel(); 
             List<OfficialModel> contentList = new List<OfficialModel>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
 
                 var list = from p in ctx.BOfficial
@@ -43,7 +43,7 @@ namespace TitansAPI.Command.Action
         {
 
             OfficialModel model = new OfficialModel();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 model = await (from p in ctx.BOfficial
                            where p.OfficialId == id
@@ -66,7 +66,7 @@ namespace TitansAPI.Command.Action
         {
             
             List<OfficialModel> contentList = new List<OfficialModel>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var data  = from p in ctx.BOfficial
                             orderby p.OfficialLastName, p.OfficialFirstName
@@ -91,7 +91,7 @@ namespace TitansAPI.Command.Action
         {
             try
             {
-                using (var ctx = new PBAContext())
+                using (var ctx = new titansContext())
                 {
                     var official = await ctx.BOfficial.Where(s => s.OfficialId == model.OfficialId).FirstOrDefaultAsync();
                     if (official == null)

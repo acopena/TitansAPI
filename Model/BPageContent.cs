@@ -13,6 +13,6 @@ namespace TitansAPI.Model
         public int PageContentId { get; set; }
         public string PageContentTitle { get; set; }
 
-        public ICollection<BContent> BContent { get; set; }
+        public virtual ICollection<BContent> BContent { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace TitansAPI.Model
         public int? MemberId { get; set; }
         public bool? PrimaryContact { get; set; }
 
-        public BContactType ContactType { get; set; }
-        public BMember Member { get; set; }
+        public virtual BContactType ContactType { get; set; }
+        public virtual BMember Member { get; set; }
     }
 }

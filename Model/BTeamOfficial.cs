@@ -9,7 +9,7 @@ namespace TitansAPI.Model
         public int OfficialId { get; set; }
         public int TeamId { get; set; }
 
-        public BOfficial Official { get; set; }
-        public BTeam Team { get; set; }
+        public virtual BOfficial Official { get; set; }
+        public virtual BTeam Team { get; set; }
     }
 }

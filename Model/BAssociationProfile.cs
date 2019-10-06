@@ -12,6 +12,6 @@ namespace TitansAPI.Model
         public bool? EmergencyContact { get; set; }
         public bool? UploadImage { get; set; }
 
-        public BAssociation Association { get; set; }
+        public virtual BAssociation Association { get; set; }
     }
 }

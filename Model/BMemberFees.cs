@@ -16,8 +16,8 @@ namespace TitansAPI.Model
         public double Qst { get; set; }
         public decimal TotalFee { get; set; }
 
-        public BCart CartGu { get; set; }
-        public BFeeTrx FeeTrx { get; set; }
-        public BMemberRegistration MemberReg { get; set; }
+        public virtual BCart CartGu { get; set; }
+        public virtual BFeeTrx FeeTrx { get; set; }
+        public virtual BMemberRegistration MemberReg { get; set; }
     }
 }

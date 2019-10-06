@@ -17,8 +17,8 @@ namespace TitansAPI.Model
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
 
-        public ICollection<BDiscountFees> BDiscountFees { get; set; }
-        public ICollection<BMemberRegistration> BMemberRegistration { get; set; }
-        public ICollection<BSiteApprover> BSiteApprover { get; set; }
+        public virtual ICollection<BDiscountFees> BDiscountFees { get; set; }
+        public virtual ICollection<BMemberRegistration> BMemberRegistration { get; set; }
+        public virtual ICollection<BSiteApprover> BSiteApprover { get; set; }
     }
 }

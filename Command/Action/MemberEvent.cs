@@ -15,7 +15,7 @@ namespace TitansAPI.Command.Action
         public async Task<MemberUrlModel> GetMemberInfo(string FirstName, string LastName, string gender, DateTime BirthDate, IMapper _mapper)
         {
             MemberUrlModel model = new MemberUrlModel();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var memberInfo = await ctx.BMember
                     .Include(s => s.BMemberContactInfo)
@@ -60,7 +60,7 @@ namespace TitansAPI.Command.Action
         public async Task<MemberUrlModel> GetMemberById(int Id, IMapper _mapper)
         {
             MemberUrlModel model = new MemberUrlModel();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var memberInfo = await ctx.BMember
                     .Include(s => s.BMemberContactInfo)
@@ -103,7 +103,7 @@ namespace TitansAPI.Command.Action
         {
             int memberId = 0;
             BMember member = new BMember();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
 
                 if (data.MemberId > 0)

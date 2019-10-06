@@ -13,7 +13,7 @@ namespace TitansAPI.Common
         public static async Task<List<BContactType>> GetContactTypeList()
         {
             List<BContactType> List = new List<BContactType>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 List = await ctx.BContactType
                     .Select(s => s).ToListAsync();
@@ -26,7 +26,7 @@ namespace TitansAPI.Common
         {
             int divisionId = 0;
             int CurrentAge = DateTime.Now.Year - BirthYear;
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var division = await ctx.BDivision
                     .Where(s => s.DivisionTypeId == 2 && s.MinimumAge <= CurrentAge && s.MaximumAge >= CurrentAge)

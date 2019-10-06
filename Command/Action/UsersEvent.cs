@@ -15,7 +15,7 @@ namespace TitansAPI.Command.Action
         public async Task<List<UsersModel>> GetList(IMapper _mapper)
         {
             List<UsersModel> userList = new List<UsersModel>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var users = await ctx.BUsers
                     .Include(s => s.Association)
@@ -36,7 +36,7 @@ namespace TitansAPI.Command.Action
             UsersModel model = new UsersModel();
             try
             {
-                using (var ctx = new PBAContext())
+                using (var ctx = new titansContext())
                 {
                     var user = await ctx.BUsers
                         .Include(s => s.Association)
@@ -89,7 +89,7 @@ namespace TitansAPI.Command.Action
         public async Task<UsersModel> GetUserById(int Id)
         {
             UsersModel model = new UsersModel();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var user = await ctx.BUsers
                     .Include(s => s.Association)
@@ -121,7 +121,7 @@ namespace TitansAPI.Command.Action
             return model;
         }
 
-        static async Task<UsersModel> GetUser(BUsers src, PBAContext ctx)
+        static async Task<UsersModel> GetUser(BUsers src, titansContext ctx)
         {
             UsersModel model = new UsersModel();
             model.UserId = src.UserId;
@@ -157,7 +157,7 @@ namespace TitansAPI.Command.Action
         {
             int userId = 0;
             UsersModel model = new UsersModel();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var dta = await (from p in ctx.BUsers
                                  where p.UserName == value.UserName
@@ -193,7 +193,7 @@ namespace TitansAPI.Command.Action
         {
             int userId = 0;
             UsersModel model = new UsersModel();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var dta = await (from p in ctx.BUsers
                                  where p.UserName == value.UserName

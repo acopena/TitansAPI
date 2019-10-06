@@ -13,6 +13,6 @@ namespace TitansAPI.Model
         public int StatusId { get; set; }
         public string StatusName { get; set; }
 
-        public ICollection<BMember> BMember { get; set; }
+        public virtual ICollection<BMember> BMember { get; set; }
     }
 }

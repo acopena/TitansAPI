@@ -16,7 +16,7 @@ namespace TitansAPI.Model
         public int? ContactGroupId { get; set; }
         public int? SortOrder { get; set; }
 
-        public ICollection<BAssociationContactInfo> BAssociationContactInfo { get; set; }
-        public ICollection<BMemberContactInfo> BMemberContactInfo { get; set; }
+        public virtual ICollection<BAssociationContactInfo> BAssociationContactInfo { get; set; }
+        public virtual ICollection<BMemberContactInfo> BMemberContactInfo { get; set; }
     }
 }

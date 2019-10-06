@@ -15,7 +15,7 @@ namespace TitansAPI.Command.Action
         public async Task<List<TeamModel>> GetList(int seasonId,int divisionId,IMapper _mapper)
         {
             List<TeamModel> contentList = new List<TeamModel>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var data = await ctx.BTeam
                     .Include(s => s.BTeamPlayers)
@@ -44,7 +44,7 @@ namespace TitansAPI.Command.Action
         public async Task<List<MemberProspectModel>> GetProspectMemberList(int divisionId,int seasonId)
         {
             List<MemberProspectModel> contentList = new List<MemberProspectModel>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var division = await ctx.BDivision.Where(s => s.DivisionId == divisionId).FirstOrDefaultAsync();
                 if (division != null)
@@ -80,7 +80,7 @@ namespace TitansAPI.Command.Action
         public async Task<TeamModel> GetTeamById(int teamId, IMapper _mapper)
         {
             TeamModel content = new TeamModel();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var data = await ctx.BTeam
                     .Include(s => s.BTeamPlayers)
@@ -95,7 +95,7 @@ namespace TitansAPI.Command.Action
             return content;
         }
 
-        static TeamModel SetTeamData(BTeam src, IMapper _mapper, PBAContext ctx)
+        static TeamModel SetTeamData(BTeam src, IMapper _mapper, titansContext ctx)
         {
             TeamModel data = new TeamModel();
             data = _mapper.Map<TeamModel>(src);
@@ -103,7 +103,6 @@ namespace TitansAPI.Command.Action
             if (ctx != null)
             {
                 data.Rosters = new List<TeamPlayerModel>();
-
                 foreach (var t in src.BTeamPlayers)
                 {
                     TeamPlayerModel p = new TeamPlayerModel();
@@ -115,6 +114,8 @@ namespace TitansAPI.Command.Action
                     p.DateOfBirth = member.DateOfBirth.Value;
                     data.Rosters.Add(p);
                 }
+
+                data.Rosters = data.Rosters.OrderBy(s => s.FirstName + " " + s.LastName).ToList();
 
                 data.Officials = new List<TeamOfficialModel>();
 
@@ -144,7 +145,7 @@ namespace TitansAPI.Command.Action
         public async Task<List<PositionModel>> GetPositionList()
         {
             List<PositionModel> PositionList= new List<PositionModel>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
 
                 PositionList = await ctx.BPosition
@@ -162,7 +163,7 @@ namespace TitansAPI.Command.Action
         public async Task<List<PositionModel>> GetAllPositionList()
         {
             List<PositionModel> PositionList = new List<PositionModel>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
 
                 PositionList = await ctx.BPosition
@@ -183,7 +184,7 @@ namespace TitansAPI.Command.Action
             try
             {
 
-                using (var ctx = new PBAContext())
+                using (var ctx = new titansContext())
                 {
                     string TeamName = model.DivisionName;
                     if (model.Officials.Count > 0)

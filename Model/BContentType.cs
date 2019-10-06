@@ -14,6 +14,6 @@ namespace TitansAPI.Model
         public string ContentTypeName { get; set; }
         public int? ContentSortKey { get; set; }
 
-        public ICollection<BContent> BContent { get; set; }
+        public virtual ICollection<BContent> BContent { get; set; }
     }
 }

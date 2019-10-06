@@ -12,6 +12,6 @@ namespace TitansAPI.Model
         public string EmergencyAddress { get; set; }
         public string EmergencyRelationShip { get; set; }
 
-        public BMember Member { get; set; }
+        public virtual BMember Member { get; set; }
     }
 }

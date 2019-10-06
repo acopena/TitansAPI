@@ -7,7 +7,6 @@ namespace TitansAPI.Model
     {
         public BOfficial()
         {
-            BClinicOfficials = new HashSet<BClinicOfficials>();
             BTeamOfficial = new HashSet<BTeamOfficial>();
         }
 
@@ -25,9 +24,8 @@ namespace TitansAPI.Model
         public string Gender { get; set; }
         public string Address { get; set; }
 
-        public BOfficialStatus OfficialStatus { get; set; }
-        public BPosition Position { get; set; }
-        public ICollection<BClinicOfficials> BClinicOfficials { get; set; }
-        public ICollection<BTeamOfficial> BTeamOfficial { get; set; }
+        public virtual BOfficialStatus OfficialStatus { get; set; }
+        public virtual BPosition Position { get; set; }
+        public virtual ICollection<BTeamOfficial> BTeamOfficial { get; set; }
     }
 }

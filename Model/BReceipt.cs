@@ -19,7 +19,7 @@ namespace TitansAPI.Model
         public string Ornotes { get; set; }
         public decimal Oramount { get; set; }
 
-        public BCart CartGu { get; set; }
-        public BPaymentType PaymentType { get; set; }
+        public virtual BCart CartGu { get; set; }
+        public virtual BPaymentType PaymentType { get; set; }
     }
 }

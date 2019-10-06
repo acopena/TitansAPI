@@ -15,7 +15,7 @@ namespace TitansAPI.Command.Action
         public async Task<List<SearchModel>> GetList(string search)
         {
             List<SearchModel> list= new List<SearchModel>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var data = await ctx.BMember
                     .Include(s => s.BTeamPlayers)
@@ -85,7 +85,7 @@ namespace TitansAPI.Command.Action
         {
             List<MemberRegisteredModel> list = new List<MemberRegisteredModel>();
             DateTime startDays = DateTime.Now.AddDays(NoOfDays * -1);
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var data = await ctx.BMemberRegistration
                     .Include(s => s.Member)

@@ -14,7 +14,7 @@ namespace TitansAPI.Command.Action
         public async Task<List<ContentModel>> GetList(IMapper _mapper, int status, int pageId)
         {
             List<ContentModel> contentList = new List<ContentModel>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var content = await ctx.BContent
                     .Include(s => s.PageContent)
@@ -46,7 +46,7 @@ namespace TitansAPI.Command.Action
         public async Task<ContentModel> GetWebContentId(int id, IMapper _mapper)
         {
             ContentModel model = new ContentModel();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var content = await ctx.BContent
                     .Include(s => s.PageContent)
@@ -65,7 +65,7 @@ namespace TitansAPI.Command.Action
         public async Task<List<ContentModel>> GetWebContenListByPage(int pageId,IMapper _mapper)
         {
             List<ContentModel> contentList = new List<ContentModel>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var content = await ctx.BContent
                     .Include(s => s.PageContent)
@@ -87,7 +87,7 @@ namespace TitansAPI.Command.Action
         public async Task<List<BContentType>> GetWebContentTypeList()
         {
             List<BContentType> model = new List<BContentType>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 model = await ctx.BContentType
                     .Select(s => s).ToListAsync();
@@ -98,7 +98,7 @@ namespace TitansAPI.Command.Action
         public async Task<List<BPageContent>> GetWebPageContentList()
         {
             List<BPageContent> model = new List<BPageContent>();
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 model = await ctx.BPageContent
                     .Select(s => s).ToListAsync();
@@ -108,7 +108,7 @@ namespace TitansAPI.Command.Action
 
         public async Task<int> PostWebContent(ContentParamModel value, IMapper _mapper)
         {
-            using (var ctx = new PBAContext())
+            using (var ctx = new titansContext())
             {
                 var dta = await ctx.BContent.Where(p => p.ContentId == value.ContentId).
                            Select(p => p).FirstOrDefaultAsync();

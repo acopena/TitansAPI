@@ -13,6 +13,6 @@ namespace TitansAPI.Model
         public string DocumentType { get; set; }
         public string DocumentNotes { get; set; }
 
-        public BContent Content { get; set; }
+        public virtual BContent Content { get; set; }
     }
 }

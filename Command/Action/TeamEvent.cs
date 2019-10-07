@@ -12,9 +12,9 @@ namespace TitansAPI.Command.Action
 {
     public class TeamEvent : ITeamEvent
     {
-        public async Task<List<TeamModel>> GetList(int seasonId,int divisionId,IMapper _mapper)
+        public async Task<List<TeamTitansModel>> GetList(int seasonId,int divisionId,IMapper _mapper)
         {
-            List<TeamModel> contentList = new List<TeamModel>();
+            List<TeamTitansModel> contentList = new List<TeamTitansModel>();
             using (var ctx = new titansContext())
             {
                 var data = await ctx.BTeam
@@ -77,9 +77,9 @@ namespace TitansAPI.Command.Action
         }
 
 
-        public async Task<TeamModel> GetTeamById(int teamId, IMapper _mapper)
+        public async Task<TeamTitansModel> GetTeamById(int teamId, IMapper _mapper)
         {
-            TeamModel content = new TeamModel();
+            TeamTitansModel content = new TeamTitansModel();
             using (var ctx = new titansContext())
             {
                 var data = await ctx.BTeam
@@ -95,10 +95,10 @@ namespace TitansAPI.Command.Action
             return content;
         }
 
-        static TeamModel SetTeamData(BTeam src, IMapper _mapper, titansContext ctx)
+        static TeamTitansModel SetTeamData(BTeam src, IMapper _mapper, titansContext ctx)
         {
-            TeamModel data = new TeamModel();
-            data = _mapper.Map<TeamModel>(src);
+            TeamTitansModel data = new TeamTitansModel();
+            data = _mapper.Map<TeamTitansModel>(src);
 
             if (ctx != null)
             {
@@ -117,11 +117,11 @@ namespace TitansAPI.Command.Action
 
                 data.Rosters = data.Rosters.OrderBy(s => s.FirstName + " " + s.LastName).ToList();
 
-                data.Officials = new List<TeamOfficialModel>();
+                data.Officials = new List<TeamTitansOfficialModel>();
 
                 foreach (var t in src.BTeamOfficial)
                 {
-                    TeamOfficialModel p = new TeamOfficialModel();
+                    TeamTitansOfficialModel p = new TeamTitansOfficialModel();
                     p.OfficialId= t.OfficialId;
                     p.TeamOfficialId = t.TeamOfficialId;
                     
@@ -178,7 +178,7 @@ namespace TitansAPI.Command.Action
             return PositionList;
         }
 
-        public async Task<int> SaveTeam(TeamModel model)
+        public async Task<int> SaveTeam(TeamTitansModel model)
         {
             int TeamId = 0;
             try

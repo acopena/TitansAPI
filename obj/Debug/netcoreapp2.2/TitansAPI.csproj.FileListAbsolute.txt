@@ -10,9 +10,9 @@ C:\Project\TitansAPI\obj\Debug\netcoreapp2.2\TitansAPI.csprojResolveAssemblyRefe
 C:\repo\TitansAPI\bin\Debug\netcoreapp2.2\TitansAPI.deps.json
 C:\repo\TitansAPI\bin\Debug\netcoreapp2.2\TitansAPI.dll
 C:\repo\TitansAPI\bin\Debug\netcoreapp2.2\TitansAPI.pdb
-C:\repo\TitansAPI\obj\Debug\netcoreapp2.2\TitansAPI.csprojResolveAssemblyReference.cache
 C:\repo\TitansAPI\obj\Debug\netcoreapp2.2\TitansAPI.csproj.CoreCompileInputs.cache
 C:\repo\TitansAPI\obj\Debug\netcoreapp2.2\TitansAPI.AssemblyInfoInputs.cache
 C:\repo\TitansAPI\obj\Debug\netcoreapp2.2\TitansAPI.AssemblyInfo.cs
 C:\repo\TitansAPI\obj\Debug\netcoreapp2.2\TitansAPI.dll
 C:\repo\TitansAPI\obj\Debug\netcoreapp2.2\TitansAPI.pdb
+C:\repo\TitansAPI\obj\Debug\netcoreapp2.2\TitansAPI.csprojResolveAssemblyReference.cache

@@ -5,7 +5,7 @@ using TitansAPI.Model;
 
 namespace TitansAPI.Command.Models
 {
-    public class TeamModel
+    public class TeamTitansModel
     {
         public int TeamId { get; set; }
         public string TeamName { get; set; }
@@ -18,11 +18,11 @@ namespace TitansAPI.Command.Models
         public int TotalRosters{ get; set; }
         public int CreatedUserId { get; set; }
         
-        public ICollection<TeamOfficialModel> Officials { get; set; }
+        public ICollection<TeamTitansOfficialModel> Officials { get; set; }
         public ICollection<TeamPlayerModel> Rosters { get; set; }
     }
 
-    public class TeamOfficialModel
+    public class TeamTitansOfficialModel
     {
         public int TeamOfficialId { get; set; }
         public int OfficialId { get; set; }

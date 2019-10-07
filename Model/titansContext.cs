@@ -47,6 +47,7 @@ namespace TitansAPI.Model
         public virtual DbSet<BFeeType> BFeeType { get; set; }
         public virtual DbSet<BFees> BFees { get; set; }
         public virtual DbSet<BGymInfo> BGymInfo { get; set; }
+        public virtual DbSet<BImageGroup> BImageGroup { get; set; }
         public virtual DbSet<BJersey> BJersey { get; set; }
         public virtual DbSet<BLeagueSchedule> BLeagueSchedule { get; set; }
         public virtual DbSet<BMember> BMember { get; set; }
@@ -893,6 +894,19 @@ namespace TitansAPI.Model
                     .HasColumnType("text");
 
                 entity.Property(e => e.SeasonId).HasColumnName("SeasonID");
+            });
+
+            modelBuilder.Entity<BImageGroup>(entity =>
+            {
+                entity.HasKey(e => e.ImageGroupId);
+
+                entity.ToTable("b_ImageGroup");
+
+                entity.Property(e => e.ImageGroupId).HasColumnName("ImageGroupId");
+
+                entity.Property(e => e.ImageGroupName)
+                    .IsRequired()
+                    .HasMaxLength(250);
             });
 
             modelBuilder.Entity<BJersey>(entity =>

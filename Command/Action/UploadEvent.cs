@@ -58,6 +58,70 @@ namespace TitansAPI.Command.Action
 
         }
 
+        public async Task<List<BImageGroup>> GetImageGroupList()
+        {
+            List<BImageGroup> imgGroupList = new List<BImageGroup>();
+            using (var ctx = new titansContext())
+            {
+                imgGroupList = await ctx.BImageGroup.OrderBy(s => s.ImageGroupName).ToListAsync();
+            }
+            return imgGroupList;
+        }
+
+        public async Task<List<ImageGroupModel>> GetImageGroup()
+        {
+            List<ImageGroupModel> model= new List<ImageGroupModel>();
+            using (var ctx = new titansContext())
+            {
+                //Get all the images
+                var ImageList = await ctx.BUpload.ToListAsync();
+                var imgGroup = ImageList.GroupBy(s => s.DivisionId).Select(x => x.First()).ToList();
+                foreach(var i in imgGroup)
+                {
+
+                    var group = await ctx.BImageGroup.Where(s => s.ImageGroupId == i.DivisionId.Value).FirstOrDefaultAsync();
+
+                    var image = new  ImageGroupModel();
+
+                    image.ImageGroupId = i.DivisionId.Value;
+                    image.ImageGroupName = group.ImageGroupName;
+                    image.SeasonList = GetImageSeasonList(ImageList, i.DivisionId.Value);
+                    model.Add(image);
+                }
+
+
+            }
+            return model;
+        }
+
+        List<ImageModel> GetImageNameList(List<BUpload> imgList, int divisionId, int seasonId)
+        {
+            return (from p in imgList
+                    where p.DivisionId == divisionId && p.SeasonId == seasonId
+                    select new ImageModel()
+                    {
+                        ImageName = p.Name
+                    }).ToList();
+        }
+
+
+        List<SeasonGroupModel> GetImageSeasonList(List<BUpload> imgList, int divisionId)
+        {
+            List<SeasonGroupModel> model = new List<SeasonGroupModel>();
+            var data = imgList.Where(s => s.DivisionId == divisionId).Select(s => s.SeasonId).Distinct().ToList();
+            foreach(var i in data)
+            {
+                SeasonGroupModel im = new SeasonGroupModel();
+                im.SeasonId = i;
+                im.ImageList = GetImageNameList(imgList, divisionId, i);
+                model.Add(im);
+            }
+
+            return model;
+
+
+        }
+
         public async Task PostImages(UploadModel model)
         {
 
@@ -92,7 +156,7 @@ namespace TitansAPI.Command.Action
             }
 
         }
-     
+
     }
 
     public class ImageDisplayModel
@@ -120,4 +184,22 @@ namespace TitansAPI.Command.Action
         public string ImagePath { get; set; }
         public int? divisonId { get; set; }
     }
+
+    public class ImageGroupModel
+    {
+        public int ImageGroupId { get; set; }
+        public string ImageGroupName { get; set; }
+        public List<SeasonGroupModel> SeasonList { get; set; }
+
+    }
+    public class SeasonGroupModel
+    {
+        public int SeasonId { get; set; }
+        public List<ImageModel> ImageList{ get; set; }
+    }
+    public class ImageModel
+    {
+        public string ImageName{ get; set; }
+    }
+
 }

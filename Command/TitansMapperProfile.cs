@@ -27,7 +27,7 @@ namespace TitansAPI.Command
             CreateMap<EmergencyInfoModel, BMemberEmergencyContact>()
            .ReverseMap();
 
-            CreateMap<BTeam, TeamModel>()
+            CreateMap<BTeam, TeamTitansModel>()
                 .ForMember(dest => dest.DivisionName, opt => opt.MapFrom(src => src.Division.DivisionName))
                 .ForMember(dest => dest.TotalRosters, opt => opt.MapFrom(src => src.BTeamPlayers.Count))
                 .ReverseMap(); 

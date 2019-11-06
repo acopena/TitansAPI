@@ -1,55 +1,39 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TitansAPI.Command.Models;
 using TitansAPI.Model;
 
 namespace TitansAPI.Command.Action
 {
-    public class DivisionEvent: IDivisionModel
+    public class DivisionEvent : IDivisionEvent
     {
-        public async Task<List<BDivision>> GetList()
+        public async Task<List<DivisionModel>> GetList(IMapper _mapper, titansContext context)
         {
-            List<BDivision> contentList = new List<BDivision>();
-            using (var ctx = new titansContext())
-            {
-                contentList = await ctx.BDivision
-                    .Select(s => s).ToListAsync();
-
-            }
-            return contentList;
+            //var data = await context.BDivision
+            //    .Select(s => s).ToListAsync();
+            return _mapper.Map<List<DivisionModel>>(await context.BDivision
+                .Select(s => s).ToListAsync());
         }
 
-        public async Task<BDivision> GetDivisionById(int id)
+        public async Task<DivisionModel> GetDivisionById(int id, IMapper _mapper, titansContext context)
         {
-            BDivision model = new BDivision();
-            using (var ctx = new titansContext())
-            {
-                model = await ctx.BDivision
+                return await context.BDivision
                     .Where(s => s.DivisionId == id)
-                    .Select(s => s).FirstOrDefaultAsync();
-
-                
-            }
-            return model;
+                    .Select(s => _mapper.Map<DivisionModel>(s)).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<BDivision>> GetDivisionByTypeId(int id)
+        public async Task<List<DivisionModel>> GetDivisionByTypeId(int id, IMapper _mapper, titansContext context)
         {
-            List<BDivision> contentList = new List<BDivision>();
-            using (var ctx = new titansContext())
-            {
-                contentList = await ctx.BDivision
-                    .Where(s=>s.DivisionTypeId == id)
+            List<DivisionModel> contentList = new List<DivisionModel>();
+       
+                var data = await context.BDivision
+                    .Where(s => s.DivisionTypeId == id)
                     .Select(s => s).ToListAsync();
-
-
-            }
-            return contentList;
+                return _mapper.Map<List<DivisionModel>>(data);
+       
         }
     }
 }

@@ -98,9 +98,10 @@ namespace TitansAPI.Model
             if (!optionsBuilder.IsConfigured)
             {
                 // optionsBuilder.UseSqlServer("Server=PINOY\\PINOY;Initial Catalog=titans;Integrated Security=True");
+                //var db = optionsBuilder. _configuration.GetValue<string>("Connectionstring:Local");
 
-                string cn = @"Data Source=tcp:sql2k1602.discountasp.net;Initial Catalog=SQL2016_921245_opena;User ID=SQL2016_921245_opena_user;Password=@co1367551;";
-                optionsBuilder.UseSqlServer(cn);
+                //string cn = @"Data Source=tcp:sql2k1602.discountasp.net;Initial Catalog=SQL2016_921245_opena;User ID=SQL2016_921245_opena_user;Password=@co1367551;";
+                //optionsBuilder.UseSqlServer(cn);
             }
         }
 

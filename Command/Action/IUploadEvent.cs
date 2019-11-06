@@ -8,10 +8,10 @@ namespace TitansAPI.Command.Action
 {
     public interface IUploadEvent
     {
-        Task<List<UploadDisplayModel>> GetUploadList(int? divisionId, int? seasonId);
-        Task<List<UploadDisplayModel>> GetUpload(int uploadId);
-        Task PostImages(UploadModel model);
-        Task<List<BImageGroup>> GetImageGroupList();
-        Task<List<ImageGroupModel>> GetImageGroup();
+        Task<List<UploadDisplayModel>> GetUploadList(int? divisionId, int? seasonId, titansContext context);
+        Task<List<UploadDisplayModel>> GetUpload(int uploadId, titansContext context);
+        Task PostImages(UploadModel model, titansContext context);
+        Task<List<BImageGroup>> GetImageGroupList(titansContext context);
+        Task<List<ImageGroupModel>> GetImageGroup(titansContext context);
     }
 }

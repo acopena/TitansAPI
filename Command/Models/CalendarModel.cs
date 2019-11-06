@@ -14,7 +14,8 @@ namespace TitansAPI.Command.Models
         public string Subject { get; set; }
         public int UserId{ get; set; }
         public int? TeamId{ get; set; }
-        
+        public DateTime? DatePosted { get; set; }
+
     }
 
     public class CalendarUrlModel
@@ -29,4 +30,5 @@ namespace TitansAPI.Command.Models
         public int? TeamId { get; set; }
 
     }
+
 }

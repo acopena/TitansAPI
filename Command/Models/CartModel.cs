@@ -13,6 +13,10 @@ namespace TitansAPI.Command.Models
         public int AssociationId{ get; set; }
         public DateTime CartDate{ get; set; }
         public List<CartListModel> CartList{ get; set; }
+        public CartModel()
+        {
+            CartList = new List<CartListModel>();
+        }
 
     }
 

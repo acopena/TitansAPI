@@ -15,7 +15,6 @@ namespace TitansAPI.Command.Models
         public DateTime? DateUpdated { get; set; }
         public int? CreatedUserId { get; set; }
         public int? DivisionTypeId { get; set; }
-        public string AccountNo { get; set; }
-        public string GenderId { get; set; }
+       
     }
 }

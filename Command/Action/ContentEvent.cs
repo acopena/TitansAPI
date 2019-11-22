@@ -21,19 +21,13 @@ namespace TitansAPI.Command.Action
                 .Select(s => s).ToListAsync();
 
             if (status == 1)
-            {
                 content = content.Where(s => s.PublishedEndDate >= DateTime.Now).ToList();
-            }
             else if (status == 2)
-            {
                 content = content.Where(s => s.PublishedEndDate < DateTime.Now).ToList();
-            }
-
+        
             if (pageId != 0)
-            {
                 content = content.Where(s => s.PageContentId == pageId).ToList();
-            }
-
+            
             foreach (var r in content)
             {
                 ContentModel model = _mapper.Map<ContentModel>(r);
@@ -82,20 +76,15 @@ namespace TitansAPI.Command.Action
 
         public async Task<List<BContentType>> GetWebContentTypeList(titansContext context)
         {
-            List<BContentType> model = new List<BContentType>();
-
-            model = await context.BContentType
+            return await context.BContentType
                 .Select(s => s).ToListAsync();
-            return model;
+            
         }
 
         public async Task<List<BPageContent>> GetWebPageContentList(titansContext context)
         {
-            List<BPageContent> model = new List<BPageContent>();
-
-            model = await context.BPageContent
+            return await context.BPageContent
                 .Select(s => s).ToListAsync();
-            return model;
         }
 
         public async Task<int> PostWebContent(ContentParamModel value, IMapper _mapper, titansContext context)
@@ -106,13 +95,8 @@ namespace TitansAPI.Command.Action
 
             if (dta == null)
             {
-                BContent data = _mapper.Map<BContent>(value);
-
-                value.ContentId = data.ContentId;
-                data.PublishedStartDate = new DateTime(value.PublishStartYear, value.PublishStartMonth, value.PublishStartDay, 0, 0, 0);
-                data.PublishedEndDate = new DateTime(value.PublishedEndYear, value.PublishedEndMonth, value.PublishedEndDay, 0, 0, 0);
-                data.DateModified = DateTime.Now;
-                data.IsExpired = false;
+                BContent data = new BContent();
+                _mapper.Map(value, data);
                 await context.BContent.AddAsync(data);
                 await context.SaveChangesAsync();
                 value.ContentId = data.ContentId;
@@ -120,14 +104,7 @@ namespace TitansAPI.Command.Action
             }
             else
             {
-                dta.ContentTitle = value.ContentTitle;
-                dta.ContentDetails = value.ContentDetails;
-                dta.PublishedStartDate = new DateTime(value.PublishStartYear, value.PublishStartMonth, value.PublishStartDay);
-                dta.PublishedEndDate = new DateTime(value.PublishedEndYear, value.PublishedEndMonth, value.PublishedEndDay);
-                dta.UserId = value.UserId;
-                dta.DateModified = DateTime.Now;
-                dta.PageContentId = value.PageContentId;
-                dta.ContentTypeId = value.ContentTypeId;
+                _mapper.Map(value, dta);
                 await context.SaveChangesAsync();
             }
             return value.ContentId;

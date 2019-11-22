@@ -30,15 +30,8 @@ namespace TitansAPI.Command.Action
                 try
                 {
                     model = _mapper.Map<MemberUrlModel>(memberInfo);
-                    model.MemberId = memberInfo.MemberId;
-                    model.BirthYear = memberInfo.DateOfBirth.Value.Year;
-                    model.BirthMonth = memberInfo.DateOfBirth.Value.Month;
-                    model.BirthDay = memberInfo.DateOfBirth.Value.Day;
-                    var eInfo = memberInfo.BMemberEmergencyContact.FirstOrDefault();
-
-                    model.EmergencyInfo = _mapper.Map<EmergencyInfoModel>(eInfo);
-                    var cInfo = memberInfo.BMemberContactInfo.ToList();
-                    model.ContactInfo = _mapper.Map<List<ContactInfoModel>>(cInfo);
+                    model.EmergencyInfo = _mapper.Map<EmergencyInfoModel>(memberInfo.BMemberEmergencyContact.FirstOrDefault());
+                    model.ContactInfo = _mapper.Map<List<ContactInfoModel>>(memberInfo.BMemberContactInfo.ToList());
                 }
                 catch (Exception err)
                 {
@@ -69,14 +62,8 @@ namespace TitansAPI.Command.Action
                 try
                 {
                     model = _mapper.Map<MemberUrlModel>(memberInfo);
-                    model.BirthYear = memberInfo.DateOfBirth.Value.Year;
-                    model.BirthMonth = memberInfo.DateOfBirth.Value.Month;
-                    model.BirthDay = memberInfo.DateOfBirth.Value.Day;
-                    var eInfo = memberInfo.BMemberEmergencyContact.FirstOrDefault();
-
-                    model.EmergencyInfo = _mapper.Map<EmergencyInfoModel>(eInfo);
-                    var cInfo = memberInfo.BMemberContactInfo.ToList();
-                    model.ContactInfo = _mapper.Map<List<ContactInfoModel>>(cInfo);
+                    model.EmergencyInfo = _mapper.Map<EmergencyInfoModel>(memberInfo.BMemberEmergencyContact.FirstOrDefault());
+                    model.ContactInfo = _mapper.Map<List<ContactInfoModel>>(memberInfo.BMemberContactInfo.ToList());
                 }
                 catch (Exception err)
                 {
@@ -94,7 +81,7 @@ namespace TitansAPI.Command.Action
         }
 
 
-        public async Task<CartModel> GetCart(int userId, titansContext context)
+        public async Task<CartModel> GetCart(int userId, IMapper _mapper, titansContext context)
         {
             CartModel cart = new CartModel();
 
@@ -105,27 +92,29 @@ namespace TitansAPI.Command.Action
 
                 var content = await context.BCart
                     .Include(s => s.BMemberRegistration)
+                    
                     .Where(s => s.UserId == userInfo.UserId && s.CartStatusId == 1)
                     .Select(s => s).FirstOrDefaultAsync();
 
                 if (content != null)
                 {
-                    cart.AssociationId = content.AssociationId.Value;
-                    cart.CartDate = content.CartDate;
-                    cart.CartGuid = content.CartGuid;
-                    cart.CartStatusId = content.CartStatusId;
-                    cart.SeasonId = content.SeasonId.Value;
-                    cart.UserId = content.UserId;
+                    cart = _mapper.Map<CartModel>(content);
+                    //cart.AssociationId = content.AssociationId.Value;
+                    //cart.CartDate = content.CartDate;
+                    //cart.CartGuid = content.CartGuid;
+                    //cart.CartStatusId = content.CartStatusId;
+                    //cart.SeasonId = content.SeasonId.Value;
+                    //cart.UserId = content.UserId;
 
-                    cart.CartList = new List<CartListModel>();
+                    
                     foreach (var c in content.BMemberRegistration)
                     {
-                        CartListModel m = new CartListModel();
+                        CartListModel m =  new CartListModel();
                         m.MemberId = c.MemberId;
                         m.DivisionId = c.DivisionId.Value;
                         m.DivisionName = await context.BDivision.Where(s => s.DivisionId == c.DivisionId).Select(s => s.DivisionName).FirstOrDefaultAsync();
                         var member = context.BMember.Single(s => s.MemberId == m.MemberId);
-                        m.LastName = member.LastName;
+                        m.LastName = c.Member.LastName;
                         m.FirstName = member.FirstName;
                         m.Gender = member.Gender;
                         m.DateOfBirth = member.DateOfBirth.Value;
@@ -136,13 +125,13 @@ namespace TitansAPI.Command.Action
                 else
                 {
                     int CurrentSeason = context.BSeasonSetting.Where(s => s.AssociationId == 1).Select(s => s).FirstOrDefault().SeasonId;
-                    cart = await GetNewCart(userId, CurrentSeason, context);
+                    cart = await GetNewCart(userId, CurrentSeason, _mapper, context);
                 }
             }
 
             return cart;
         }
-        public async Task<CartModel> GetNewCart(int userId, int seasonId, titansContext context)
+        public async Task<CartModel> GetNewCart(int userId, int seasonId, IMapper mapper, titansContext context)
         {
             try
             {

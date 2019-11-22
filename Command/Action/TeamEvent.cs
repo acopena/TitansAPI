@@ -181,8 +181,8 @@ namespace TitansAPI.Command.Action
                     t.MaxAge = 50;
                     t.IsPibnateam = true; ;
                     t.IsCompetitive = true; ;
-                    context.BTeam.Add(t);
-                    context.SaveChanges();
+                    await context.BTeam.AddAsync(t);
+                    await context.SaveChangesAsync();
                     model.TeamId = t.TeamId;
                 }
                 else
@@ -195,29 +195,26 @@ namespace TitansAPI.Command.Action
                     team.IsCompetitive = model.IsCompetitive;
                     team.IsPibnateam = model.IsPibnateam;
                     team.DateUpdated = DateTime.Now;
-                    context.SaveChanges();
-
+                    await context.SaveChangesAsync();
                 }
 
                 TeamId = model.TeamId;
 
                 //Remove existing official
-                var xOfficial = context.BTeamOfficial.Where(x => x.TeamId == model.TeamId);
+                var xOfficial = await context.BTeamOfficial.Where(x => x.TeamId == model.TeamId).ToListAsync();
                 context.BTeamOfficial.RemoveRange(xOfficial);
-
-
                 foreach (var o in model.Officials)
                 {
-                    var official = context.BTeamOfficial.Where(s => s.TeamOfficialId == o.TeamOfficialId).Select(s => s).FirstOrDefault();
+                    var official = await context.BTeamOfficial.Where(s => s.TeamOfficialId == o.TeamOfficialId).Select(s => s).FirstOrDefaultAsync();
                     if (official == null)
                     {
                         BTeamOfficial tOfficial = new BTeamOfficial();
                         tOfficial.TeamId = model.TeamId;
                         tOfficial.OfficialId = o.OfficialId;
-                        context.BTeamOfficial.Add(tOfficial);
+                        await context.BTeamOfficial.AddAsync(tOfficial);
                     }
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 //Check if the Member is remove on the current list
                 var cRoster = await (context.BTeamPlayers.Where(s => s.TeamId == model.TeamId).Select(p => p)).ToListAsync();
@@ -229,7 +226,7 @@ namespace TitansAPI.Command.Action
                         context.BTeamPlayers.Remove(r);
                     }
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 var NewRoster = model.Rosters.Where(s => s.TeamPlayerId == 0).Select(s => s).ToList();
                 foreach (var r in NewRoster)
@@ -240,10 +237,10 @@ namespace TitansAPI.Command.Action
                         roster.TeamId = model.TeamId;
                         roster.MemberId = r.MemberId;
                         roster.DateJoined = DateTime.Now;
-                        context.BTeamPlayers.Add(roster);
+                        await context.BTeamPlayers.AddAsync(roster);
                     }
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
             catch (Exception err)
             {

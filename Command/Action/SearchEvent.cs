@@ -15,7 +15,6 @@ namespace TitansAPI.Command.Action
         public async Task<List<SearchModel>> GetList(string search, titansContext context)
         {
             List<SearchModel> list = new List<SearchModel>();
-
             var data = await context.BMember
                 .Include(s => s.BTeamPlayers)
                 .Include(s => s.BMemberContactInfo)

@@ -48,6 +48,11 @@ namespace TitansAPI.Command.Models
         public string Address { get; set; }
         public List<ContactInfoModel> ContactInfo{ get; set; }
         public EmergencyInfoModel EmergencyInfo { get; set; }
+        public MemberUrlModel()
+        {
+            ContactInfo = new List<ContactInfoModel>();
+            EmergencyInfo = new EmergencyInfoModel();
+        }
 
     }
 

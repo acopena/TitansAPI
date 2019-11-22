@@ -14,7 +14,6 @@ namespace TitansAPI.Command.Action
         public async Task<List<CalendarModel>> GetCalendarList(IMapper _mapper, titansContext _context)
         {
             List<CalendarModel> List = new List<CalendarModel>();
-
             DateTime today = DateTime.Now.AddDays(-60);
             var data = await _context.BCalendar
                 .Where(s => s.DateTimeStart.Value >= today)
@@ -45,7 +44,6 @@ namespace TitansAPI.Command.Action
         public async Task PostCalendar(CalendarModel src, IMapper _mapper, titansContext _context)
         {
             CalendarModel model = new CalendarModel();
-
             var data = await _context.BCalendar
                  .Where(s => s.CalendarId == src.CalendarId)
                  .Select(s => s).FirstOrDefaultAsync();
@@ -56,14 +54,7 @@ namespace TitansAPI.Command.Action
             }
             else
             {
-
-                data.Subject = src.Title;
-                data.DatePosted = DateTime.Now;
-                data.Notes = src.Subject;
-                data.DateTimeStart = src.Start;
-                data.DateTimeEnd = src.End;
-                data.PostedById = src.UserId;
-                data.TeamId = src.TeamId;
+                _mapper.Map(src, data);
             }
 
             await _context.SaveChangesAsync();

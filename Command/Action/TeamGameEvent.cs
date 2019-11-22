@@ -15,8 +15,6 @@ namespace TitansAPI.Command.Action
         public async Task<List<TeamGameModel>> GetTeamGameByTeam(int SeasonId, int TeamId, int DivisionId, IMapper _mapper, titansContext context)
         {
             List<TeamGameModel> teamGameModel = new List<TeamGameModel>();
-
-
             var model = context.BTeamGame
                     .Include(s => s.Team)
                     .Include(s => s.BTeamStat)
@@ -31,10 +29,7 @@ namespace TitansAPI.Command.Action
 
             if (TeamId > 0)
                 model = model.Where(s => s.TeamId == TeamId);
-            teamGameModel = _mapper.Map<List<TeamGameModel>>(await model.ToListAsync());
-
-
-            return teamGameModel;
+            return _mapper.Map<List<TeamGameModel>>(await model.ToListAsync());
         }
 
         public async Task<TeamGameModel> GetTeamGameId(int TeamGameId, IMapper _mapper, titansContext context)
@@ -42,22 +37,9 @@ namespace TitansAPI.Command.Action
             TeamGameModel game = new TeamGameModel();
             try
             {
-
-
                 game = await (from p in context.BTeamGame
                               where p.TeamGameId == TeamGameId && p.EndDate == null
-                              select new TeamGameModel
-                              {
-                                  TeamGameId = p.TeamGameId,
-                                  TeamId = p.TeamId,
-                                  TeamName = p.Team.TeamName,
-                                  TeamVsName = p.TeamVsName,
-                                  TeamVsScore = p.TeamVsScore,
-                                  TeamScore = p.BTeamStat.Sum(s => s.Points),
-                                  TeamCourt = p.TeamCourt,
-                                  DatePlayed = p.DatePlayed,
-                                  Notes = p.Notes
-                              }).FirstOrDefaultAsync();
+                              select _mapper.Map<TeamGameModel>(p)).FirstOrDefaultAsync();
                 if (game != null)
                 {
                     game.TeamStat = new List<TeamStatModel>();
@@ -70,9 +52,6 @@ namespace TitansAPI.Command.Action
                         game.TeamStat.Add(stat);
                     }
                 }
-
-
-
                 return game;
             }
             catch (Exception err)
@@ -93,55 +72,26 @@ namespace TitansAPI.Command.Action
                 if (game == null)
                 {
                     BTeamGame g = new BTeamGame();
-                    g.TeamId = model.TeamId;
-                    g.TeamVsName = model.TeamVsName;
-                    g.TeamCourt = model.TeamCourt;
-                    g.Notes = model.Notes;
-                    g.PostedById = model.PostedById;
-                    g.TeamVsScore = model.TeamVsScore;
-                    g.DatePlayed = model.DatePlayed;
+                    _mapper.Map(model, g);
                     await context.BTeamGame.AddAsync(g);
                     await context.SaveChangesAsync();
                     model.TeamGameId = g.TeamGameId;
                 }
                 else
                 {
-                    game.TeamVsName = model.TeamVsName;
-                    game.TeamCourt = model.TeamCourt;
-                    game.Notes = model.Notes;
-                    game.PostedById = model.PostedById;
-                    game.TeamVsScore = model.TeamVsScore;
-                    game.DatePlayed = model.DatePlayed;
+                    _mapper.Map(model, game);
                     await context.SaveChangesAsync();
                 }
 
                 var removeTeamStat = await context.BTeamStat.Where(s => s.TeamGameId == model.TeamGameId).ToListAsync();
                 context.BTeamStat.RemoveRange(removeTeamStat);
-
-
                 foreach (var r in model.TeamStat)
                 {
-                    BTeamStat stat = new BTeamStat();
-
+                    BTeamStat stat = new BTeamStat();                    
+                    _mapper.Map(r, stat);
                     stat.TeamGameId = model.TeamGameId;
-                    stat.MemberId = r.MemberId;
-                    stat.Points = r.Points;
-                    stat.FieldGoalAttemts = r.FieldGoalAttemts;
-                    stat.FieldGoalMade = r.FieldGoalMade;
-                    stat.FreeThrowsAttemts = r.FreeThrowsAttemts;
-                    stat.FreeThrowsMade = r.FreeThrowsMade;
-                    stat.ThreeFieldGoalAttemts = r.ThreeFieldGoalAttemts;
-                    stat.ThreeFieldGoalMade = r.ThreeFieldGoalMade;
-                    stat.OffensiveRebounds = r.OffensiveRebounds;
-                    stat.DefensiveRebounds = r.DefensiveRebounds;
-                    stat.Assits = r.Assits;
-                    stat.Steals = r.Steals;
-                    stat.Blocks = r.Blocks;
-                    stat.TurnOvers = r.TurnOvers;
-                    stat.PersonalFoul = r.PersonalFoul;
                     await context.BTeamStat.AddAsync(stat);
                 }
-
                 await context.SaveChangesAsync();
             }
             catch (Exception err)

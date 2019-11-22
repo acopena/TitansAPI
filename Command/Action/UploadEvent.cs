@@ -12,7 +12,6 @@ namespace TitansAPI.Command.Action
         public async Task<List<UploadDisplayModel>> GetUploadList(int? divisionId, int? seasonId, titansContext context)
         {
             List<UploadDisplayModel> uploadList = new List<UploadDisplayModel>();
-
             uploadList = await (from p in context.BUpload
                                 where p.EndDate == null
                                 select new UploadDisplayModel()
@@ -40,7 +39,6 @@ namespace TitansAPI.Command.Action
         public async Task<List<UploadDisplayModel>> GetUpload(int uploadId, titansContext context)
         {
             List<UploadDisplayModel> uploadList = new List<UploadDisplayModel>();
-
             uploadList = await (from p in context.BUpload
                                 where p.UploadId == uploadId && p.EndDate == null
                                 select new UploadDisplayModel()
@@ -50,8 +48,6 @@ namespace TitansAPI.Command.Action
                                     Type = p.Type,
                                     ImagePath = p.ImagePath
                                 }).ToListAsync();
-
-
             return uploadList;
 
         }
@@ -72,7 +68,6 @@ namespace TitansAPI.Command.Action
             var imgGroup = ImageList.GroupBy(s => s.DivisionId).Select(x => x.First()).ToList();
             foreach (var i in imgGroup)
             {
-
                 var group = await context.BImageGroup.Where(s => s.ImageGroupId == i.DivisionId.Value).FirstOrDefaultAsync();
 
                 var image = new ImageGroupModel();

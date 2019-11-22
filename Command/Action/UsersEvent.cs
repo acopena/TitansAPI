@@ -124,9 +124,6 @@ namespace TitansAPI.Command.Action
             model.AssociationName = src.Association.AssociationName;
             model.AccessCode = "xxxx";
             model.BlockAccount = src.BlockAccount;
-
-
-
             model.UserTypeId = src.UserTypeId;
             model.UserTypeName = ctx.BUserType.Where(s => s.UserTypeId == src.UserTypeId).Select(s => s.UserTypeName).FirstOrDefault();
 

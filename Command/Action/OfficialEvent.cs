@@ -12,14 +12,14 @@ namespace TitansAPI.Command.Action
 {
     public class OfficialEvent : IOfficialEvent
     {
-        public async Task<OfficialPageModel> GetList(int pageSize, int page, IMapper mapper, titansContext context)
+        public async Task<OfficialPageModel> GetList(int pageSize, int page, IMapper _mapper, titansContext context)
         {
             var model = new OfficialPageModel();
             List<OfficialModel> contentList = new List<OfficialModel>();
 
             var list = from p in context.BOfficial
                        where p.OfficialStatusId == 1
-                       select new OfficialModel
+                       select new OfficialModel()
                        {
                            OfficialId = p.OfficialId,
                            FirstName = p.OfficialFirstName,
@@ -48,9 +48,7 @@ namespace TitansAPI.Command.Action
         }
 
         public async Task<List<OfficialModel>> GetRawList(IMapper mapper, titansContext context)
-        {
-
-
+        {            
             var data = await context.BOfficial
                 .Include(s => s.Position)
                 .OrderBy(s => s.OfficialLastName)
@@ -64,7 +62,6 @@ namespace TitansAPI.Command.Action
         {
             try
             {
-
                 var official = await context.BOfficial.Where(s => s.OfficialId == model.OfficialId).FirstOrDefaultAsync();
                 if (official == null)
                 {

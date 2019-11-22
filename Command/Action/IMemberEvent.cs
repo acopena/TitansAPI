@@ -12,8 +12,8 @@ namespace TitansAPI.Command.Action
     {        
         Task<MemberUrlModel> GetMemberInfo(string FirstName, string LastName, string gender, DateTime BirthDate, IMapper _mapper, titansContext context);
         Task<MemberUrlModel> GetMemberById(int Id, IMapper _mapper, titansContext context);
-        Task<CartModel> GetCart(int userId, titansContext context);
-        Task<CartModel> GetNewCart(int userId, int seasonId, titansContext context);
+        Task<CartModel> GetCart(int userId, IMapper _mapper, titansContext context);
+        Task<CartModel> GetNewCart(int userId, int seasonId, IMapper _mapper, titansContext context);
         Task<int> SaveMember(MemberUrlModel data, IMapper _mapper, titansContext context);
         Task SaveCart(CartModel data, titansContext context);
     }
